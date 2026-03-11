@@ -1,43 +1,32 @@
-// Wavecrest Bookstore - Home Page App
+// Wavecrest Bookstore - Home Page with Carousel
 
 class BookstoreApp {
     constructor() {
         this.books = [];
         this.carouselData = [
             {
-                id: 'article-1',
-                title: '如何在浮躁的时代保持深度阅读',
-                desc: '在这个信息爆炸的时代，深度阅读变得越来越珍贵',
-                color: 'linear-gradient(135deg, #8B7355, #A89078)',
-                tag: '编辑推荐'
+                id: 1,
+                tag: '专题',
+                title: '村上春树的夏天',
+                desc: '探索村上春树作品中的夏日意象与孤独美学',
+                color: '#8B7355',
+                link: 'article-detail.html?id=1'
             },
             {
-                id: 'article-2',
-                title: '浪潮与岛屿：Wavecrest的诞生',
-                desc: '每个书店都有自己的故事',
-                color: 'linear-gradient(135deg, #6B7B8C, #8B9BA8)',
-                tag: '专题'
+                id: 2,
+                tag: '书单',
+                title: '春日治愈系书单',
+                desc: '十本让心灵平静的好书，陪你度过温暖春日',
+                color: '#A89078',
+                link: 'article-detail.html?id=2'
             },
             {
-                id: 'article-3',
-                title: '春日治愈书单',
-                desc: '10本书带你逃离喧嚣，享受阅读时光',
-                color: 'linear-gradient(135deg, #A5B5A0, #B8C4A8)',
-                tag: '书单'
-            },
-            {
-                id: 'article-4',
-                title: '对话村上春树',
-                desc: '跑步、写作与爵士乐',
-                color: 'linear-gradient(135deg, #9A8B7A, #B5A89A)',
-                tag: '访谈'
-            },
-            {
-                id: 'article-5',
-                title: '设计一间理想的书房',
-                desc: 'MUJI美学的启示',
-                color: 'linear-gradient(135deg, #7A8B99, #9AABBA)',
-                tag: '空间'
+                id: 3,
+                tag: '访谈',
+                title: '与译者对话',
+                desc: '翻译的艺术：如何在两种语言间传递文学之美',
+                color: '#6B6B6B',
+                link: 'article-detail.html?id=3'
             }
         ];
         this.currentSlide = 0;
@@ -61,7 +50,6 @@ class BookstoreApp {
         const response = await fetch('data/books.json');
         const data = await response.json();
         this.books = data.books;
-        this.categories = data.categories;
     }
 
     renderCarousel() {
@@ -70,14 +58,12 @@ class BookstoreApp {
         
         if (!container) return;
 
-        // Render carousel items
-        container.innerHTML = this.carouselData.map((item, index) => `
-            <div class="carousel-item" data-index="${index}" data-id="${item.id}"
-                 style="background: ${item.color}"
-                 onclick="window.location.href='${item.id}.html'">
-                <div class="carousel-image" style="background: ${item.color}">
-                    <span class="carousel-tag">${item.tag}</span>
-                    <div class="carousel-content">
+        // Render slides
+        container.innerHTML = this.carouselData.map(item => `
+            <div class="carousel-item" data-link="${item.link}" style="background: linear-gradient(135deg, ${item.color}20, ${item.color}05);">
+                <div class="carousel-content">
+                    <div class="carousel-card">
+                        <div class="carousel-tag">${item.tag}</div>
                         <h2 class="carousel-title">${item.title}</h2>
                         <p class="carousel-desc">${item.desc}</p>
                     </div>
@@ -87,51 +73,45 @@ class BookstoreApp {
 
         // Render dots
         dotsContainer.innerHTML = this.carouselData.map((_, index) => `
-            <button class="carousel-dot ${index === 0 ? 'active' : ''}" data-index="${index}"
-                    aria-label="跳转到第${index + 1}张"></button>
+            <div class="carousel-dot ${index === 0 ? 'active' : ''}" data-index="${index}"></div>
         `).join('');
 
-        // Center first item
-        this.scrollToSlide(0);
+        // Add click handlers to slides
+        container.querySelectorAll('.carousel-item').forEach(item => {
+            item.addEventListener('click', () => {
+                window.location.href = item.dataset.link;
+            });
+        });
+
+        // Add click handlers to dots
+        dotsContainer.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+            dot.addEventListener('click', () => this.goToSlide(index));
+        });
     }
 
-    scrollToSlide(index) {
-        const container = document.getElementById('carouselContainer');
-        const dots = document.querySelectorAll('.carousel-dot');
-        
-        if (!container) return;
-
+    goToSlide(index) {
         this.currentSlide = index;
-        const item = container.children[index];
+        const container = document.getElementById('carouselContainer');
+        container.style.transform = `translateX(-${index * 100}%)`;
         
-        // Calculate scroll position to center the item
-        const containerWidth = container.offsetWidth;
-        const itemWidth = item.offsetWidth;
-        const itemLeft = item.offsetLeft;
-        const scrollPosition = itemLeft - (containerWidth - itemWidth) / 2;
-        
-        container.scrollTo({ left: scrollPosition, behavior: 'smooth' });
-
         // Update dots
-        dots.forEach((dot, i) => {
+        document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
             dot.classList.toggle('active', i === index);
         });
     }
 
     nextSlide() {
         const next = (this.currentSlide + 1) % this.carouselData.length;
-        this.scrollToSlide(next);
+        this.goToSlide(next);
     }
 
     prevSlide() {
         const prev = (this.currentSlide - 1 + this.carouselData.length) % this.carouselData.length;
-        this.scrollToSlide(prev);
+        this.goToSlide(prev);
     }
 
     startAutoPlay() {
-        setInterval(() => {
-            this.nextSlide();
-        }, 5000);
+        setInterval(() => this.nextSlide(), 5000);
     }
 
     renderAllSections() {
@@ -156,7 +136,6 @@ class BookstoreApp {
 
         container.innerHTML = sectionBooks.map(book => this.renderBookCard(book)).join('');
 
-        // Add click handlers
         container.querySelectorAll('.book-card').forEach((card, index) => {
             card.addEventListener('click', () => {
                 window.location.href = `book.html?id=${sectionBooks[index].id}`;
@@ -206,40 +185,33 @@ class BookstoreApp {
             nextBtn.addEventListener('click', () => {
                 container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
             });
-
-            // Update button states
-            const updateButtons = () => {
-                prevBtn.disabled = container.scrollLeft <= 0;
-                nextBtn.disabled = container.scrollLeft >= container.scrollWidth - container.clientWidth - 10;
-            };
-
-            container.addEventListener('scroll', updateButtons);
-            updateButtons();
         });
     }
 
     setupEventListeners() {
-        // Carousel controls
-        const prevBtn = document.getElementById('carouselPrev');
-        const nextBtn = document.getElementById('carouselNext');
-        const dotsContainer = document.getElementById('carouselDots');
-
-        prevBtn?.addEventListener('click', () => this.prevSlide());
-        nextBtn?.addEventListener('click', () => this.nextSlide());
-
-        dotsContainer?.addEventListener('click', (e) => {
-            if (e.target.classList.contains('carousel-dot')) {
-                const index = parseInt(e.target.dataset.index);
-                this.scrollToSlide(index);
-            }
-        });
+        // Carousel buttons
+        document.getElementById('carouselPrev')?.addEventListener('click', () => this.prevSlide());
+        document.getElementById('carouselNext')?.addEventListener('click', () => this.nextSlide());
 
         // Mobile nav toggle
         const navToggle = document.getElementById('navToggle');
         const navIcons = document.querySelector('.nav-icons');
 
         navToggle?.addEventListener('click', () => {
-            navIcons?.classList.toggle('show');
+            const isVisible = navIcons.style.display === 'flex';
+            navIcons.style.display = isVisible ? 'none' : 'flex';
+            if (!isVisible) {
+                navIcons.style.position = 'absolute';
+                navIcons.style.top = '52px';
+                navIcons.style.left = '0';
+                navIcons.style.right = '0';
+                navIcons.style.background = 'var(--bg)';
+                navIcons.style.flexDirection = 'row';
+                navIcons.style.justifyContent = 'center';
+                navIcons.style.padding = '16px';
+                navIcons.style.borderBottom = '1px solid var(--hairline)';
+                navIcons.style.boxShadow = 'var(--shadow-md)';
+            }
         });
     }
 }
