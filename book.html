@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>书籍详情 - Wavecrest Bookstore</title>
+    <meta name="description" content="书籍详情 - Wavecrest Bookstore">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600&family=Noto+Serif+SC:wght@400;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <svg class="logo-icon" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 16C4 16 12 8 20 16C28 24 36 16 44 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M4 24C4 24 12 16 20 24C28 32 36 24 44 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+                </svg>
+                <span class="logo-text">Wavecrest</span>
+            </a>
+            <div class="nav-search">
+                <input type="text" id="searchInput" placeholder="搜索书名、作者...">
+                <button class="search-btn" aria-label="搜索">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="M21 21l-4.35-4.35"/>
+                    </svg>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="about.html">关于</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="切换菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Book Detail Page -->
+    <main class="book-detail-page" id="bookDetailPage">
+        <div class="loading" id="loadingState">
+            <p>加载中...</p>
+        </div>
+        
+        <div class="book-detail-container" id="bookContent" style="display: none;">
+            <!-- Book Header -->
+            <section class="book-detail-hero">
+                <div class="container">
+                    <div class="book-detail-main">
+                        <div class="book-detail-cover-large" id="bookCover">
+                            <div class="book-cover-placeholder-large">
+                                <div class="book-cover-title-large" id="coverTitle"></div>
+                                <div class="book-cover-author-large" id="coverAuthor"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="book-detail-info-full">
+                            <div class="book-breadcrumb">
+                                <a href="index.html">首页</a>
+                                <span>/</span>
+                                <span id="categoryName"></span>
+                                <span>/</span>
+                                <span id="breadcrumbTitle"></span>
+                            </div>
+                            
+                            <h1 class="book-detail-title-large" id="bookTitle"></h1>
+                            <p class="book-detail-author-large" id="bookAuthor"></p>
+                            
+                            <div class="book-detail-rating-large" id="bookRating">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <span id="ratingValue"></span>
+                                <span id="reviewCount"></span>
+                            </div>
+                            
+                            <div class="book-detail-price-large" id="bookPrice"></div>
+                            
+                            <div class="book-detail-actions">
+                                <button class="btn btn-primary btn-large" id="buyBtn">立即购买</button>
+                                <button class="btn btn-secondary" id="shareBtn">分享</button>
+                            </div>
+                            
+                            <div class="book-detail-meta-grid" id="bookMeta">
+                                <div class="meta-item">
+                                    <span class="meta-label">出版社</span>
+                                    <span class="meta-value" id="metaPublisher"></span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-label">出版年份</span>
+                                    <span class="meta-value" id="metaYear"></span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-label">页数</span>
+                                    <span class="meta-value" id="metaPages"></span>
+                                </div>
+                                <div class="meta-item"
+>
+                                    <span class="meta-label">分类</span>
+                                    <span class="meta-value" id="metaCategory"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Book Content -->
+            <section class="book-detail-content">
+                <div class="container">
+                    <div class="book-detail-layout">
+                        <div class="book-detail-left">
+                            <div class="content-section">
+                                <h2 class="content-title">编辑推荐</h2>
+                                <blockquote class="book-highlight-large" id="bookHighlight"></blockquote>
+                            </div>
+                            
+                            <div class="content-section">
+                                <h2 class="content-title">内容简介</h2>
+                                <div class="book-description-full" id="bookDescription"></div>
+                            </div>
+                            
+                            <div class="content-section">
+                                <h2 class="content-title">标签</h2>
+                                <div class="book-tags-large" id="bookTags"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="book-detail-right">
+                            <div class="sidebar-section">
+                                <h3 class="sidebar-title">同类推荐</h3>
+                                <div class="sidebar-books" id="relatedBooks"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Not Found State -->
+        <div class="not-found" id="notFoundState" style="display: none;">
+            <div class="container">
+                <div class="not-found-content">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                    </svg>
+                    <h2>书籍未找到</h2>
+                    <p>抱歉，您查找的书籍不存在或已被下架。</p>
+                    <a href="index.html" class="btn btn-primary">返回首页</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <svg class="footer-logo" viewBox="0 0 48 32" fill="none">
+                        <path d="M4 16C4 16 12 8 20 16C28 24 36 16 44 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M4 24C4 24 12 16 20 24C28 32 36 24 44 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+                    </svg>
+                    <p class="footer-slogan">没有人是一座孤岛。</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">首页</a>
+                    <a href="about.html">关于</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Wavecrest Bookstore. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/book.js"></script>
+</body>
+</html>

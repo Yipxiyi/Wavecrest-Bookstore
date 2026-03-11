@@ -34,10 +34,8 @@
                 </button>
             </div>
             <ul class="nav-links">
-                <li><a href="#recent">新书</a></li>
-                <li><a href="#featured">精选</a></li>
-                <li><a href="#popular">热门</a></li>
-                <li><a href="#classic">经典</a></li>
+                <li><a href="search.html">搜索</a></li>
+                <li><a href="about.html">关于</a></li>
             </ul>
             <button class="nav-toggle" id="navToggle" aria-label="切换菜单">
                 <span></span>
@@ -64,82 +62,112 @@
         </div>
     </section>
 
-    <!-- Search Results (hidden by default) -->
-    <section class="search-results section" id="searchResults" style="display: none;">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Search Results</span>
-                <h2 class="section-title">搜索结果</h2>
-                <p class="section-desc" id="searchDesc">找到 0 本书</p>
-            </div>
-            <div class="books-grid" id="searchResultsGrid"></div>
-            <button class="btn btn-secondary" id="clearSearch">返回书库</button>
-        </div>
-    </section>
-
     <!-- Book Library Sections -->
     <main class="library" id="library">
         <!-- 最近新增 -->
-        <section class="section" id="recent">
+        <section class="section section-compact" id="recent">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">New Arrivals</span>
-                    <h2 class="section-title">最近新增</h2>
-                    <p class="section-desc">本周新到店的书籍</p>
+                <div class="section-header-compact">
+                    <div class="section-title-wrap">
+                        <span class="section-tag">New Arrivals</span>
+                        <h2 class="section-title">最近新增</h2>
+                    </div>
+                    <a href="search.html" class="section-more">查看全部 ></a>
                 </div>
-                <div class="books-grid" id="recentGrid"></div>
+                <div class="books-scroll" id="recentScroll">
+                    <button class="scroll-btn scroll-prev" aria-label="向左滑动">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 18l-6-6 6-6"/>
+                        </svg>
+                    </button>
+                    <div class="books-scroll-container" id="recentContainer"></div>
+                    <button class="scroll-btn scroll-next" aria-label="向右滑动">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </section>
 
         <!-- 编辑精选 -->
-        <section class="section section-alt" id="featured">
+        <section class="section section-compact section-alt" id="featured">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">Editor's Choice</span>
-                    <h2 class="section-title">编辑精选</h2>
-                    <p class="section-desc">本期特别推荐</p>
+                <div class="section-header-compact">
+                    <div class="section-title-wrap">
+                        <span class="section-tag">Editor's Choice</span>
+                        <h2 class="section-title">编辑精选</h2>
+                    </div>
+                    <a href="search.html" class="section-more">查看全部 ></a>
                 </div>
-                <div class="books-grid" id="featuredGrid"></div>
+                <div class="books-scroll" id="featuredScroll">
+                    <button class="scroll-btn scroll-prev" aria-label="向左滑动">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 18l-6-6 6-6"/>
+                        </svg>
+                    </button>
+                    <div class="books-scroll-container" id="featuredContainer"></div>
+                    <button class="scroll-btn scroll-next" aria-label="向右滑动">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </section>
 
         <!-- 热门借阅 -->
-        <section class="section" id="popular">
+        <section class="section section-compact" id="popular">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">Popular</span>
-                    <h2 class="section-title">热门借阅</h2>
-                    <p class="section-desc">本月最受读者喜爱</p>
+                <div class="section-header-compact">
+                    <div class="section-title-wrap">
+                        <span class="section-tag">Popular</span>
+                        <h2 class="section-title">热门借阅</h2>
+                    </div>
+                    <a href="search.html" class="section-more">查看全部 ></a>
                 </div>
-                <div class="books-grid" id="popularGrid"></div>
+                <div class="books-scroll" id="popularScroll">
+                    <button class="scroll-btn scroll-prev" aria-label="向左滑动">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 18l-6-6 6-6"/>
+                        </svg>
+                    </button>
+                    <div class="books-scroll-container" id="popularContainer"></div>
+                    <button class="scroll-btn scroll-next" aria-label="向右滑动">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </section>
 
         <!-- 经典重温 -->
-        <section class="section section-alt" id="classic">
+        <section class="section section-compact section-alt" id="classic">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">Classics</span>
-                    <h2 class="section-title">经典重温</h2>
-                    <p class="section-desc">值得反复阅读的永恒之作</p>
+                <div class="section-header-compact">
+                    <div class="section-title-wrap">
+                        <span class="section-tag">Classics</span>
+                        <h2 class="section-title">经典重温</h2>
+                    </div>
+                    <a href="search.html" class="section-more">查看全部 ></a>
                 </div>
-                <div class="books-grid" id="classicGrid"></div>
+                <div class="books-scroll" id="classicScroll">
+                    <button class="scroll-btn scroll-prev" aria-label="向左滑动">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 18l-6-6 6-6"/>
+                        </svg>
+                    </button>
+                    <div class="books-scroll-container" id="classicContainer"></div>
+                    <button class="scroll-btn scroll-next" aria-label="向右滑动">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </section>
     </main>
-
-    <!-- Book Detail Modal -->
-    <div class="modal" id="bookModal">
-        <div class="modal-backdrop"></div>
-        <div class="modal-content">
-            <button class="modal-close" aria-label="关闭">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M18 6L6 18M6 6l12 12"/>
-                </svg>
-            </button>
-            <div class="modal-body" id="modalBody"></div>
-        </div>
-    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -153,10 +181,9 @@
                     <p class="footer-slogan">没有人是一座孤岛。</p>
                 </div>
                 <div class="footer-links">
-                    <a href="#recent">新书</a>
-                    <a href="#featured">精选</a>
-                    <a href="#popular">热门</a>
-                    <a href="#classic">经典</a>
+                    <a href="index.html">首页</a>
+                    <a href="search.html">搜索</a>
+                    <a href="about.html">关于</a>
                 </div>
             </div>
             <div class="footer-bottom">
