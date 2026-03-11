@@ -18,7 +18,11 @@ class SearchPage {
             const query = params.get('q');
             
             if (query) {
-                document.getElementById('searchInput').value = query;
+                // Sync both search inputs
+                const navSearch = document.getElementById('searchInput');
+                const mainSearch = document.getElementById('mainSearchInput');
+                if (navSearch) navSearch.value = query;
+                if (mainSearch) mainSearch.value = query;
                 this.performSearch(query);
             }
         } catch (error) {
@@ -103,23 +107,40 @@ class SearchPage {
     }
 
     setupEventListeners() {
-        const searchInput = document.getElementById('searchInput');
-        const searchBtn = document.querySelector('.search-btn');
+        const navSearchInput = document.getElementById('searchInput');
+        const mainSearchInput = document.getElementById('mainSearchInput');
+        const navSearchBtn = document.querySelector('.nav-search .search-btn');
 
-        // Search input
-        searchInput?.addEventListener('keypress', (e) => {
+        // Main search input (large search box)
+        mainSearchInput?.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 const value = e.target.value.trim();
                 if (value) {
+                    // Sync to nav search
+                    if (navSearchInput) navSearchInput.value = value;
                     this.updateURL(value);
                     this.performSearch(value);
                 }
             }
         });
 
-        searchBtn?.addEventListener('click', () => {
-            const value = searchInput?.value.trim();
+        // Nav search input
+        navSearchInput?.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const value = e.target.value.trim();
+                if (value) {
+                    // Sync to main search
+                    if (mainSearchInput) mainSearchInput.value = value;
+                    this.updateURL(value);
+                    this.performSearch(value);
+                }
+            }
+        });
+
+        navSearchBtn?.addEventListener('click', () => {
+            const value = navSearchInput?.value.trim();
             if (value) {
+                if (mainSearchInput) mainSearchInput.value = value;
                 this.updateURL(value);
                 this.performSearch(value);
             }
@@ -132,7 +153,7 @@ class SearchPage {
                 e.target.classList.add('active');
                 this.currentFilter = e.target.dataset.filter;
                 
-                const query = searchInput?.value.trim();
+                const query = mainSearchInput?.value.trim() || navSearchInput?.value.trim();
                 if (query) {
                     this.performSearch(query);
                 }
