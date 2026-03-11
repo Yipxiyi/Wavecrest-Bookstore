@@ -9,7 +9,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Noto+Serif+SC:wght@400;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600&family=Noto+Serif+SC:wght@400;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -17,18 +17,27 @@
     <!-- Navigation -->
     <nav class="nav" id="nav">
         <div class="nav-container">
-            <a href="#" class="logo">
+            <a href="index.html" class="logo">
                 <svg class="logo-icon" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4 16C4 16 12 8 20 16C28 24 36 16 44 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
                     <path d="M4 24C4 24 12 16 20 24C28 32 36 24 44 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
                 </svg>
                 <span class="logo-text">Wavecrest</span>
             </a>
+            <div class="nav-search">
+                <input type="text" id="searchInput" placeholder="搜索书名、作者...">
+                <button class="search-btn" aria-label="搜索">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="M21 21l-4.35-4.35"/>
+                    </svg>
+                </button>
+            </div>
             <ul class="nav-links">
-                <li><a href="#story">品牌故事</a></li>
-                <li><a href="#values">核心价值</a></li>
-                <li><a href="#books">选书</a></li>
-                <li><a href="#contact">联系我们</a></li>
+                <li><a href="#recent">新书</a></li>
+                <li><a href="#featured">精选</a></li>
+                <li><a href="#popular">热门</a></li>
+                <li><a href="#classic">经典</a></li>
             </ul>
             <button class="nav-toggle" id="navToggle" aria-label="切换菜单">
                 <span></span>
@@ -39,274 +48,98 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="hero">
+    <section class="hero hero-compact" id="hero">
         <div class="wave-bg">
             <svg class="wave wave-1" viewBox="0 0 1440 320" preserveAspectRatio="none">
-                <path fill="#BFC9D9" fill-opacity="0.3" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                <path fill="#E8E4DF" fill-opacity="0.4" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
             </svg>
             <svg class="wave wave-2" viewBox="0 0 1440 320" preserveAspectRatio="none">
-                <path fill="#BFC9D9" fill-opacity="0.2" d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,106.7C672,117,768,171,864,186.7C960,203,1056,181,1152,165.3C1248,149,1344,139,1392,133.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-            </svg>
-            <svg class="wave wave-3" viewBox="0 0 1440 320" preserveAspectRatio="none">
-                <path fill="#F2E9DA" fill-opacity="0.4" d="M0,256L48,261.3C96,267,192,277,288,266.7C384,256,480,224,576,213.3C672,203,768,213,864,229.3C960,245,1056,267,1152,261.3C1248,256,1344,224,1392,208L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                <path fill="#D4CEC7" fill-opacity="0.3" d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,106.7C672,117,768,171,864,186.7C960,203,1056,181,1152,165.3C1248,149,1344,139,1392,133.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
             </svg>
         </div>
         <div class="hero-content">
-            <div class="hero-logo fade-in-up">
-                <svg class="hero-logo-icon" viewBox="0 0 64 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 20C4 20 16 8 28 20C40 32 52 20 60 20" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                    <path d="M4 30C4 30 16 18 28 30C40 42 52 30 60 30" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+            <h1 class="hero-title">Wavecrest Bookstore</h1>
+            <p class="hero-slogan">没有人是一座孤岛。</p>
+            <p class="hero-subtitle">让阅读成为连接我们的浪潮</p>
+        </div>
+    </section>
+
+    <!-- Search Results (hidden by default) -->
+    <section class="search-results section" id="searchResults" style="display: none;">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Search Results</span>
+                <h2 class="section-title">搜索结果</h2>
+                <p class="section-desc" id="searchDesc">找到 0 本书</p>
+            </div>
+            <div class="books-grid" id="searchResultsGrid"></div>
+            <button class="btn btn-secondary" id="clearSearch">返回书库</button>
+        </div>
+    </section>
+
+    <!-- Book Library Sections -->
+    <main class="library" id="library">
+        <!-- 最近新增 -->
+        <section class="section" id="recent">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">New Arrivals</span>
+                    <h2 class="section-title">最近新增</h2>
+                    <p class="section-desc">本周新到店的书籍</p>
+                </div>
+                <div class="books-grid" id="recentGrid"></div>
+            </div>
+        </section>
+
+        <!-- 编辑精选 -->
+        <section class="section section-alt" id="featured">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Editor's Choice</span>
+                    <h2 class="section-title">编辑精选</h2>
+                    <p class="section-desc">本期特别推荐</p>
+                </div>
+                <div class="books-grid" id="featuredGrid"></div>
+            </div>
+        </section>
+
+        <!-- 热门借阅 -->
+        <section class="section" id="popular">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Popular</span>
+                    <h2 class="section-title">热门借阅</h2>
+                    <p class="section-desc">本月最受读者喜爱</p>
+                </div>
+                <div class="books-grid" id="popularGrid"></div>
+            </div>
+        </section>
+
+        <!-- 经典重温 -->
+        <section class="section section-alt" id="classic">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Classics</span>
+                    <h2 class="section-title">经典重温</h2>
+                    <p class="section-desc">值得反复阅读的永恒之作</p>
+                </div>
+                <div class="books-grid" id="classicGrid"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Book Detail Modal -->
+    <div class="modal" id="bookModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="关闭">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M18 6L6 18M6 6l12 12"/>
                 </svg>
-            </div>
-            <h1 class="hero-title fade-in-up delay-1">
-                <span class="brand-name">Wavecrest Bookstore</span>
-            </h1>
-            <p class="hero-slogan fade-in-up delay-2">没有人是一座孤岛。</p>
-            <p class="hero-subtitle fade-in-up delay-3">让阅读成为连接我们的浪潮</p>
-            <div class="hero-cta fade-in-up delay-4">
-                <a href="#story" class="btn btn-primary">探索故事</a>
-                <a href="#books" class="btn btn-secondary">浏览选书</a>
-            </div>
+            </button>
+            <div class="modal-body" id="modalBody"></div>
         </div>
-        <div class="scroll-indicator">
-            <div class="scroll-mouse">
-                <div class="scroll-wheel"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Story Section -->
-    <section class="story section" id="story">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Brand Story</span>
-                <h2 class="section-title">品牌故事</h2>
-                <div class="wave-divider">
-                    <svg viewBox="0 0 120 12" fill="none">
-                        <path d="M0 6C20 6 20 2 40 2C60 2 60 10 80 10C100 10 100 6 120 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
-                    </svg>
-                </div>
-            </div>
-            <div class="story-content">
-                <div class="story-text">
-                    <p class="story-lead fade-in">
-                        在海与海之间，总有无数的岛屿，它们静静伫立，看似孤独，却被潮水永恒地牵引、触碰与连接。
-                    </p>
-                    <div class="story-body fade-in">
-                        <p><strong>Wavecrest Bookstore</strong> 诞生于这样一种想象——</p>
-                        <p class="story-highlight">如果书是一道道浪潮，那么每一次阅读都是人与世界之间的交汇。</p>
-                        <p>我们相信：<strong>没有人是一座孤岛。</strong></p>
-                        <p>阅读使我们与思想相连，与陌生人相连，与未曾抵达的未来相连。</p>
-                    </div>
-                </div>
-                <div class="story-cards">
-                    <div class="story-card fade-in-up">
-                        <div class="card-icon">
-                            <svg viewBox="0 0 48 48" fill="none">
-                                <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="1.5"/>
-                                <path d="M16 24C16 24 20 16 24 24C28 32 32 24 32 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <h3>听思想的浪声</h3>
-                        <p>在这里，你可以静下来，聆听文字间的潮起潮落</p>
-                    </div>
-                    <div class="story-card fade-in-up delay-1">
-                        <div class="card-icon">
-                            <svg viewBox="0 0 48 48" fill="none">
-                                <path d="M12 36L24 12L36 36" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M16 28H32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <h3>与故事同行</h3>
-                        <p>每本书都是一座岛屿，等待与你的相遇</p>
-                    </div>
-                    <div class="story-card fade-in-up delay-2">
-                        <div class="card-icon">
-                            <svg viewBox="0 0 48 48" fill="none">
-                                <circle cx="24" cy="20" r="12" stroke="currentColor" stroke-width="1.5"/>
-                                <path d="M12 36C12 36 16 32 24 32C32 32 36 36 36 36" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <h3>被温柔包围</h3>
-                        <p>在文字之间和他人、和世界重新连上线</p>
-                    </div>
-                </div>
-            </div>
-            <div class="story-quote fade-in">
-                <blockquote>
-                    浪潮连接岛屿，阅读连接人心。
-                </blockquote>
-                <p class="quote-source">— Wavecrest Bookstore</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Values Section -->
-    <section class="values section section-alt" id="values">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Core Values</span>
-                <h2 class="section-title">核心价值</h2>
-                <div class="wave-divider">
-                    <svg viewBox="0 0 120 12" fill="none">
-                        <path d="M0 6C20 6 20 2 40 2C60 2 60 10 80 10C100 10 100 6 120 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
-                    </svg>
-                </div>
-            </div>
-            <div class="values-grid">
-                <div class="value-item fade-in-up">
-                    <div class="value-number">01</div>
-                    <h3 class="value-title">连接</h3>
-                    <p class="value-desc">让阅读建立人与世界的连结，每一页都是一座桥梁</p>
-                </div>
-                <div class="value-item fade-in-up delay-1">
-                    <div class="value-number">02</div>
-                    <h3 class="value-title">浪潮精神</h3>
-                    <p class="value-desc">关注时代思潮、思想浪花，永远保持对新鲜事物的好奇</p>
-                </div>
-                <div class="value-item fade-in-up delay-2">
-                    <div class="value-number">03</div>
-                    <h3 class="value-title">温度</h3>
-                    <p class="value-desc">书籍与服务都柔和、有呼吸感，像海风一样温暖</p>
-                </div>
-                <div class="value-item fade-in-up delay-3">
-                    <div class="value-number">04</div>
-                    <h3 class="value-title">美与秩序</h3>
-                    <p class="value-desc">空间、视觉、选品的自然和谐，为阅读创造最佳氛围</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Books Section -->
-    <section class="books section" id="books">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Curated Books</span>
-                <h2 class="section-title">精选书单</h2>
-                <div class="wave-divider">
-                    <svg viewBox="0 0 120 12" fill="none">
-                        <path d="M0 6C20 6 20 2 40 2C60 2 60 10 80 10C100 10 100 6 120 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
-                    </svg>
-                </div>
-            </div>
-            <p class="section-lead fade-in">每一本书，都是一座等待探索的岛屿</p>
-            <div class="books-grid">
-                <div class="book-card fade-in-up">
-                    <div class="book-cover">
-                        <div class="book-spine"></div>
-                        <div class="book-front">
-                            <span class="book-title">海边的卡夫卡</span>
-                            <span class="book-author">村上春树</span>
-                        </div>
-                    </div>
-                    <div class="book-info">
-                        <h3>海边的卡夫卡</h3>
-                        <p class="book-author">村上春树</p>
-                        <p class="book-desc">一个关于成长、命运与自我救赎的隐喻故事，像海浪一样层层推进。</p>
-                        <span class="book-tag">小说</span>
-                    </div>
-                </div>
-                <div class="book-card fade-in-up delay-1">
-                    <div class="book-cover">
-                        <div class="book-spine"></div>
-                        <div class="book-front">
-                            <span class="book-title">岛屿书</span>
-                            <span class="book-author">朱川湊人</span>
-                        </div>
-                    </div>
-                    <div class="book-info">
-                        <h3>岛屿书</h3>
-                        <p class="book-author">朱川湊人</p>
-                        <p class="book-desc">孤独的岛屿，连接着人与人之间最纤细的情感纽带。</p>
-                        <span class="book-tag">文学</span>
-                    </div>
-                </div>
-                <div class="book-card fade-in-up delay-2">
-                    <div class="book-cover">
-                        <div class="book-spine"></div>
-                        <div class="book-front">
-                            <span class="book-title">浪潮之巅</span>
-                            <span class="book-author">吴军</span>
-                        </div>
-                    </div>
-                    <div class="book-info">
-                        <h3>浪潮之巅</h3>
-                        <p class="book-author">吴军</p>
-                        <p class="book-desc">科技浪潮中的企业兴衰，思考时代变迁中的生存智慧。</p>
-                        <span class="book-tag">商业</span>
-                    </div>
-                </div>
-                <div class="book-card fade-in-up delay-3">
-                    <div class="book-cover">
-                        <div class="book-spine"></div>
-                        <div class="book-front">
-                            <span class="book-title">挪威的森林</span>
-                            <span class="book-author">村上春树</span>
-                        </div>
-                    </div>
-                    <div class="book-info">
-                        <h3>挪威的森林</h3>
-                        <p class="book-author">村上春树</p>
-                        <p class="book-desc">一段关于青春、爱情与失去的旅程，温柔而忧伤。</p>
-                        <span class="book-tag">经典</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact section section-alt" id="contact">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Contact</span>
-                <h2 class="section-title">联系我们</h2>
-                <div class="wave-divider">
-                    <svg viewBox="0 0 120 12" fill="none">
-                        <path d="M0 6C20 6 20 2 40 2C60 2 60 10 80 10C100 10 100 6 120 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
-                    </svg>
-                </div>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info fade-in">
-                    <p class="contact-lead">欢迎踏上这座岛屿</p>
-                    <p>无论你是想寻找一本书，还是想和我们聊聊阅读与人生，都可以随时联系。</p>
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                <polyline points="22,6 12,13 2,6"/>
-                            </svg>
-                            <span>hello@wavecrest.book</span>
-                        </div>
-                        <div class="contact-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                                <circle cx="12" cy="10" r="3"/>
-                            </svg>
-                            <span>某座城市的某个角落</span>
-                        </div>
-                    </div>
-                </div>
-                <form class="contact-form fade-in" id="contactForm">
-                    <div class="form-group">
-                        <label for="name">你的名字</label>
-                        <input type="text" id="name" name="name" required placeholder="如何称呼你">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">电子邮箱</label>
-                        <input type="email" id="email" name="email" required placeholder="your@email.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">留言</label>
-                        <textarea id="message" name="message" rows="4" required placeholder="想对我们说什么..."></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-full">发送消息</button>
-                </form>
-            </div>
-        </div>
-    </section>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -320,10 +153,10 @@
                     <p class="footer-slogan">没有人是一座孤岛。</p>
                 </div>
                 <div class="footer-links">
-                    <a href="#story">品牌故事</a>
-                    <a href="#values">核心价值</a>
-                    <a href="#books">选书</a>
-                    <a href="#contact">联系</a>
+                    <a href="#recent">新书</a>
+                    <a href="#featured">精选</a>
+                    <a href="#popular">热门</a>
+                    <a href="#classic">经典</a>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -332,6 +165,6 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
