@@ -3,15 +3,55 @@
 class BookstoreApp {
     constructor() {
         this.books = [];
+        this.carouselData = [
+            {
+                id: 'article-1',
+                title: '如何在浮躁的时代保持深度阅读',
+                desc: '在这个信息爆炸的时代，深度阅读变得越来越珍贵',
+                color: 'linear-gradient(135deg, #8B7355, #A89078)',
+                tag: '编辑推荐'
+            },
+            {
+                id: 'article-2',
+                title: '浪潮与岛屿：Wavecrest的诞生',
+                desc: '每个书店都有自己的故事',
+                color: 'linear-gradient(135deg, #6B7B8C, #8B9BA8)',
+                tag: '专题'
+            },
+            {
+                id: 'article-3',
+                title: '春日治愈书单',
+                desc: '10本书带你逃离喧嚣，享受阅读时光',
+                color: 'linear-gradient(135deg, #A5B5A0, #B8C4A8)',
+                tag: '书单'
+            },
+            {
+                id: 'article-4',
+                title: '对话村上春树',
+                desc: '跑步、写作与爵士乐',
+                color: 'linear-gradient(135deg, #9A8B7A, #B5A89A)',
+                tag: '访谈'
+            },
+            {
+                id: 'article-5',
+                title: '设计一间理想的书房',
+                desc: 'MUJI美学的启示',
+                color: 'linear-gradient(135deg, #7A8B99, #9AABBA)',
+                tag: '空间'
+            }
+        ];
+        this.currentSlide = 0;
         this.init();
     }
 
     async init() {
         try {
             await this.loadData();
+            this.renderCarousel();
             this.renderAllSections();
             this.setupEventListeners();
             this.setupScrollButtons();
+            this.startAutoPlay();
         } catch (error) {
             console.error('Failed to initialize:', error);
         }
@@ -22,6 +62,76 @@ class BookstoreApp {
         const data = await response.json();
         this.books = data.books;
         this.categories = data.categories;
+    }
+
+    renderCarousel() {
+        const container = document.getElementById('carouselContainer');
+        const dotsContainer = document.getElementById('carouselDots');
+        
+        if (!container) return;
+
+        // Render carousel items
+        container.innerHTML = this.carouselData.map((item, index) => `
+            <div class="carousel-item" data-index="${index}" data-id="${item.id}"
+                 style="background: ${item.color}"
+                 onclick="window.location.href='${item.id}.html'">
+                <div class="carousel-image" style="background: ${item.color}">
+                    <span class="carousel-tag">${item.tag}</span>
+                    <div class="carousel-content">
+                        <h2 class="carousel-title">${item.title}</h2>
+                        <p class="carousel-desc">${item.desc}</p>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+        // Render dots
+        dotsContainer.innerHTML = this.carouselData.map((_, index) => `
+            <button class="carousel-dot ${index === 0 ? 'active' : ''}" data-index="${index}"
+                    aria-label="跳转到第${index + 1}张"></button>
+        `).join('');
+
+        // Center first item
+        this.scrollToSlide(0);
+    }
+
+    scrollToSlide(index) {
+        const container = document.getElementById('carouselContainer');
+        const dots = document.querySelectorAll('.carousel-dot');
+        
+        if (!container) return;
+
+        this.currentSlide = index;
+        const item = container.children[index];
+        
+        // Calculate scroll position to center the item
+        const containerWidth = container.offsetWidth;
+        const itemWidth = item.offsetWidth;
+        const itemLeft = item.offsetLeft;
+        const scrollPosition = itemLeft - (containerWidth - itemWidth) / 2;
+        
+        container.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+
+        // Update dots
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+        });
+    }
+
+    nextSlide() {
+        const next = (this.currentSlide + 1) % this.carouselData.length;
+        this.scrollToSlide(next);
+    }
+
+    prevSlide() {
+        const prev = (this.currentSlide - 1 + this.carouselData.length) % this.carouselData.length;
+        this.scrollToSlide(prev);
+    }
+
+    startAutoPlay() {
+        setInterval(() => {
+            this.nextSlide();
+        }, 5000);
     }
 
     renderAllSections() {
@@ -109,38 +219,27 @@ class BookstoreApp {
     }
 
     setupEventListeners() {
-        // Search input
-        const searchInput = document.getElementById('searchInput');
-        const searchBtn = document.querySelector('.search-btn');
+        // Carousel controls
+        const prevBtn = document.getElementById('carouselPrev');
+        const nextBtn = document.getElementById('carouselNext');
+        const dotsContainer = document.getElementById('carouselDots');
 
-        searchInput?.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && e.target.value.trim()) {
-                window.location.href = `search.html?q=${encodeURIComponent(e.target.value.trim())}`;
-            }
-        });
+        prevBtn?.addEventListener('click', () => this.prevSlide());
+        nextBtn?.addEventListener('click', () => this.nextSlide());
 
-        searchBtn?.addEventListener('click', () => {
-            const value = searchInput?.value.trim();
-            if (value) {
-                window.location.href = `search.html?q=${encodeURIComponent(value)}`;
+        dotsContainer?.addEventListener('click', (e) => {
+            if (e.target.classList.contains('carousel-dot')) {
+                const index = parseInt(e.target.dataset.index);
+                this.scrollToSlide(index);
             }
         });
 
         // Mobile nav toggle
         const navToggle = document.getElementById('navToggle');
-        const navLinks = document.querySelector('.nav-links');
+        const navIcons = document.querySelector('.nav-icons');
 
         navToggle?.addEventListener('click', () => {
-            const isVisible = navLinks.style.display === 'flex';
-            navLinks.style.display = isVisible ? 'none' : 'flex';
-            navLinks.style.position = 'absolute';
-            navLinks.style.top = '100%';
-            navLinks.style.left = '0';
-            navLinks.style.right = '0';
-            navLinks.style.background = 'var(--color-bg)';
-            navLinks.style.flexDirection = 'column';
-            navLinks.style.padding = 'var(--space-md)';
-            navLinks.style.borderBottom = '1px solid var(--color-border)';
+            navIcons?.classList.toggle('show');
         });
     }
 }

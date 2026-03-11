@@ -1,28 +1,29 @@
-// Wavecrest Bookstore - Search Page
+// Wavecrest Bookstore - Search Page (New Vertical Layout)
 
 class SearchPage {
     constructor() {
         this.books = [];
+        this.filteredBooks = [];
         this.categories = {};
         this.currentFilter = 'all';
+        this.searchQuery = '';
         this.init();
     }
 
     async init() {
         try {
             await this.loadData();
+            this.filteredBooks = [...this.books];
+            this.renderBooks();
             this.setupEventListeners();
+            this.updateResultsCount();
             
-            // Check for search query in URL
+            // Check for URL parameter
             const params = new URLSearchParams(window.location.search);
             const query = params.get('q');
-            
             if (query) {
-                // Sync both search inputs
-                const navSearch = document.getElementById('searchInput');
-                const mainSearch = document.getElementById('mainSearchInput');
-                if (navSearch) navSearch.value = query;
-                if (mainSearch) mainSearch.value = query;
+                document.getElementById('searchInput').value = query;
+                this.searchQuery = query;
                 this.performSearch(query);
             }
         } catch (error) {
@@ -38,52 +39,52 @@ class SearchPage {
     }
 
     performSearch(query) {
-        const searchTerm = query.toLowerCase().trim();
-        const searchDesc = document.getElementById('searchDesc');
-        const resultsGrid = document.getElementById('searchResultsGrid');
-        const filters = document.getElementById('searchFilters');
+        this.searchQuery = query.toLowerCase().trim();
+        this.filterBooks();
+    }
 
-        let results = this.books.filter(book => {
-            // Filter by category if selected
-            if (this.currentFilter !== 'all' && book.category !== this.currentFilter) {
-                return false;
-            }
-            
-            // Search in title, author, tags
-            return (
-                book.title.toLowerCase().includes(searchTerm) ||
-                book.author.toLowerCase().includes(searchTerm) ||
-                book.tags.some(tag => tag.toLowerCase().includes(searchTerm)) ||
-                (this.categories[book.category] && this.categories[book.category].toLowerCase().includes(searchTerm))
-            );
-        });
+    filterBooks() {
+        let results = this.books;
 
-        searchDesc.textContent = `"${query}" 找到 ${results.length} 本书`;
-        filters.style.display = 'flex';
+        // Filter by category
+        if (this.currentFilter !== 'all') {
+            results = results.filter(book => book.category === this.currentFilter);
+        }
 
-        if (results.length === 0) {
-            resultsGrid.innerHTML = `
-                <div class="empty-state" style="grid-column: 1 / -1;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <circle cx="11" cy="11" r="8"/>
-                        <path d="M21 21l-4.35-4.35"/>
-                    </svg>
-                    <p>没有找到匹配的书籍</p>
-                    <p style="font-size: 0.875rem; margin-top: 0.5rem;">试试其他关键词？</p>
-                </div>
-            `;
-        } else {
-            resultsGrid.innerHTML = results.map(book => this.renderBookCard(book)).join('');
-            resultsGrid.querySelectorAll('.book-card').forEach((card, index) => {
-                card.addEventListener('click', () => {
-                    window.location.href = `book.html?id=${results[index].id}`;
-                });
+        // Filter by search query
+        if (this.searchQuery) {
+            results = results.filter(book => {
+                return (
+                    book.title.toLowerCase().includes(this.searchQuery) ||
+                    book.author.toLowerCase().includes(this.searchQuery) ||
+                    book.tags.some(tag => tag.toLowerCase().includes(this.searchQuery)) ||
+                    (this.categories[book.category] && this.categories[book.category].toLowerCase().includes(this.searchQuery))
+                );
             });
+        }
+
+        this.filteredBooks = results;
+        this.renderBooks();
+        this.updateResultsCount();
+        
+        // Show/hide empty state
+        const emptyState = document.getElementById('emptyState');
+        const bookWall = document.getElementById('bookWall');
+        
+        if (results.length === 0) {
+            emptyState.style.display = 'block';
+            bookWall.style.display = 'none';
+        } else {
+            emptyState.style.display = 'none';
+            bookWall.style.display = 'grid';
         }
     }
 
-    renderBookCard(book) {
-        return `
+    renderBooks() {
+        const container = document.getElementById('bookWall');
+        if (!container) return;
+
+        container.innerHTML = this.filteredBooks.map(book => `
             <article class="book-card" data-book-id="${book.id}">
                 <div class="book-cover" style="background-color: ${book.cover}">
                     <div class="book-cover-placeholder">
@@ -103,68 +104,59 @@ class SearchPage {
                     </div>
                 </div>
             </article>
-        `;
-    }
+        `).join('');
 
-    setupEventListeners() {
-        const navSearchInput = document.getElementById('searchInput');
-        const mainSearchInput = document.getElementById('mainSearchInput');
-        const navSearchBtn = document.querySelector('.nav-search .search-btn');
-
-        // Main search input (large search box)
-        mainSearchInput?.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                const value = e.target.value.trim();
-                if (value) {
-                    // Sync to nav search
-                    if (navSearchInput) navSearchInput.value = value;
-                    this.updateURL(value);
-                    this.performSearch(value);
-                }
-            }
-        });
-
-        // Nav search input
-        navSearchInput?.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                const value = e.target.value.trim();
-                if (value) {
-                    // Sync to main search
-                    if (mainSearchInput) mainSearchInput.value = value;
-                    this.updateURL(value);
-                    this.performSearch(value);
-                }
-            }
-        });
-
-        navSearchBtn?.addEventListener('click', () => {
-            const value = navSearchInput?.value.trim();
-            if (value) {
-                if (mainSearchInput) mainSearchInput.value = value;
-                this.updateURL(value);
-                this.performSearch(value);
-            }
-        });
-
-        // Filter buttons
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                e.target.classList.add('active');
-                this.currentFilter = e.target.dataset.filter;
-                
-                const query = mainSearchInput?.value.trim() || navSearchInput?.value.trim();
-                if (query) {
-                    this.performSearch(query);
-                }
+        // Add click handlers
+        container.querySelectorAll('.book-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const bookId = card.dataset.bookId;
+                window.location.href = `book.html?id=${bookId}`;
             });
         });
     }
 
-    updateURL(query) {
-        const url = new URL(window.location);
-        url.searchParams.set('q', query);
-        window.history.pushState({}, '', url);
+    updateResultsCount() {
+        const countEl = document.getElementById('resultsCount');
+        if (!countEl) return;
+
+        const total = this.books.length;
+        const filtered = this.filteredBooks.length;
+
+        if (this.searchQuery || this.currentFilter !== 'all') {
+            countEl.textContent = `找到 ${filtered} 本书`;
+        } else {
+            countEl.textContent = `共 ${total} 本书`;
+        }
+    }
+
+    setupEventListeners() {
+        // Search input
+        const searchInput = document.getElementById('searchInput');
+        searchInput?.addEventListener('input', (e) => {
+            this.performSearch(e.target.value);
+        });
+
+        // Filter chips
+        const filterChips = document.querySelectorAll('.filter-chip');
+        filterChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                // Update active state
+                filterChips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                
+                // Apply filter
+                this.currentFilter = chip.dataset.filter;
+                this.filterBooks();
+            });
+        });
+
+        // Mobile nav toggle
+        const navToggle = document.getElementById('navToggle');
+        const navIcons = document.querySelector('.nav-icons');
+
+        navToggle?.addEventListener('click', () => {
+            navIcons?.classList.toggle('show');
+        });
     }
 }
 

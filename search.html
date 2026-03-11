@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>搜索 - Wavecrest Bookstore</title>
-    <meta name="description" content="在 Wavecrest Bookstore 搜索书籍">
+    <meta name="description" content="搜索 Wavecrest Bookstore 的书籍">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600&family=Noto+Serif+SC:wght@400;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Navigation - Icon Only -->
     <nav class="nav" id="nav">
         <div class="nav-container">
             <a href="index.html" class="logo">
@@ -21,21 +21,36 @@
                     <path d="M4 16C4 16 12 8 20 16C28 24 36 16 44 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
                     <path d="M4 24C4 24 12 16 20 24C28 32 36 24 44 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
                 </svg>
-                <span class="logo-text">Wavecrest</span>
             </a>
-            <div class="nav-search">
-                <input type="text" id="searchInput" placeholder="搜索书名、作者..." autofocus>
-                <button class="search-btn" aria-label="搜索">
+            
+            <div class="nav-icons">
+                <a href="index.html" class="nav-icon" title="首页">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9,22 9,12 15,12 15,22"/>
+                    </svg>
+                </a>
+                <a href="articles.html" class="nav-icon" title="文章">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                    </svg>
+                </a>
+                <a href="search.html" class="nav-icon active" title="搜索">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <circle cx="11" cy="11" r="8"/>
                         <path d="M21 21l-4.35-4.35"/>
                     </svg>
-                </button>
+                </a>
+                <a href="about.html" class="nav-icon" title="关于">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="16" x2="12" y2="12"/>
+                        <line x1="12" y1="8" x2="12.01" y2="8"/>
+                    </svg>
+                </a>
             </div>
-            <ul class="nav-links">
-                <li><a href="index.html">首页</a></li>
-                <li><a href="about.html">关于</a></li>
-            </ul>
+            
             <button class="nav-toggle" id="navToggle" aria-label="切换菜单">
                 <span></span>
                 <span></span>
@@ -44,42 +59,53 @@
         </div>
     </nav>
 
-    <!-- Search Page Content -->
-    <main class="search-page">
+    <!-- Search Page - Vertical Layout -->
+    <main class="search-page-full">
         <div class="container">
-            <!-- Large Search Box -->
-            <div class="search-box-large">
-                <svg class="search-icon-large" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <circle cx="11" cy="11" r="8"/>
-                    <path d="M21 21l-4.35-4.35"/>
-                </svg>
-                <input type="text" id="mainSearchInput" placeholder="搜索书名、作者、标签..." autofocus>
-            </div>
-            
-            <div class="search-header">
-                <h1 class="search-title">搜索结果</h1>
-                <p class="search-desc" id="searchDesc">请输入关键词搜索</p>
-            </div>
-            
-            <div class="search-filters" id="searchFilters" style="display: none;">
-                <button class="filter-btn active" data-filter="all">全部</button>
-                <button class="filter-btn" data-filter="fiction">小说</button>
-                <button class="filter-btn" data-filter="literature">文学</button>
-                <button class="filter-btn" data-filter="design">设计</button>
-                <button class="filter-btn" data-filter="essay">随笔</button>
-            </div>
-
-            <div class="books-grid" id="searchResultsGrid">
-                <div class="empty-state" style="grid-column: 1 / -1;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <!-- 1. Search Box -->
+            <div class="search-section">
+                <h1 class="search-page-title">搜索书籍</h1>
+                <div class="search-box-full">
+                    <svg class="search-icon-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <circle cx="11" cy="11" r="8"/>
                         <path d="M21 21l-4.35-4.35"/>
                     </svg>
-                    <p>输入关键词开始搜索</p>
-                    <p style="font-size: 0.875rem; margin-top: 0.5rem; color: var(--tertiary);">
-                        支持搜索书名、作者、标签
-                    </p>
+                    <input type="text" id="searchInput" placeholder="输入书名、作者或关键词..." autofocus>
                 </div>
+            </div>
+            
+            <!-- 2. Filter Bar -->
+            <div class="filter-section">
+                <div class="filter-bar" id="filterBar">
+                    <button class="filter-chip active" data-filter="all">全部</button>
+                    <button class="filter-chip" data-filter="fiction">小说</button>
+                    <button class="filter-chip" data-filter="literature">文学</button>
+                    <button class="filter-chip" data-filter="design">设计</button>
+                    <button class="filter-chip" data-filter="essay">随笔</button>
+                    <button class="filter-chip" data-filter="business">商业</button>
+                    <button class="filter-chip" data-filter="graphic">漫画</button>
+                </div>
+            </div>
+            
+            <!-- 3. Results Info -->
+            <div class="results-info" id="resultsInfo">
+                <span id="resultsCount">全部书籍</span>
+                <span id="resultsSort">默认排序</span>
+            </div>
+            
+            <!-- 4. Book Wall -->
+            <div class="book-wall" id="bookWall">
+                <!-- Books will be loaded by JS -->
+            </div>
+            
+            <!-- Empty State -->
+            <div class="empty-state-full" id="emptyState" style="display: none;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="M21 21l-4.35-4.35"/>
+                </svg>
+                <p>没有找到匹配的书籍</p>
+                <p class="empty-hint">试试其他关键词或分类</p>
             </div>
         </div>
     </main>
@@ -97,6 +123,8 @@
                 </div>
                 <div class="footer-links">
                     <a href="index.html">首页</a>
+                    <a href="articles.html">文章</a>
+                    <a href="search.html">搜索</a>
                     <a href="about.html">关于</a>
                 </div>
             </div>

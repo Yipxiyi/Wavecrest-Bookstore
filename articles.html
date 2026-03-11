@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章 - Wavecrest Bookstore</title>
+    <meta name="description" content="Wavecrest Bookstore 精选文章">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation - Icon Only -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <svg class="logo-icon" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 16C4 16 12 8 20 16C28 24 36 16 44 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M4 24C4 24 12 16 20 24C28 32 36 24 44 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+                </svg>
+            </a>
+            
+            <div class="nav-icons">
+                <a href="index.html" class="nav-icon" title="首页">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9,22 9,12 15,12 15,22"/>
+                    </svg>
+                </a>
+                <a href="articles.html" class="nav-icon active" title="文章">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                    </svg>
+                </a>
+                <a href="search.html" class="nav-icon" title="搜索">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="M21 21l-4.35-4.35"/>
+                    </svg>
+                </a>
+                <a href="about.html" class="nav-icon" title="关于">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="16" x2="12" y2="12"/>
+                        <line x1="12" y1="8" x2="12.01" y2="8"/>
+                    </svg>
+                </a>
+            </div>
+            
+            <button class="nav-toggle" id="navToggle" aria-label="切换菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Articles Page -->
+    <main class="articles-page">
+        <div class="container">
+            <div class="page-header">
+                <span class="section-tag">Articles</span>
+                <h1 class="page-title">精选文章</h1>
+                <p class="page-desc">阅读我们的专题文章，探索更多阅读灵感</p>
+            </div>
+            
+            <div class="articles-grid" id="articlesGrid">
+                <!-- Article 1 -->
+                <article class="article-card">
+                    <a href="article-1.html" class="article-link">
+                        <div class="article-image" style="background: linear-gradient(135deg, #8B7355, #A89078);">
+                            <span class="article-tag">编辑推荐</span>
+                        </div>
+                        <div class="article-content">
+                            <span class="article-category">阅读指南</span>
+                            <h2 class="article-title">如何在浮躁的时代保持深度阅读</h2>
+                            <p class="article-excerpt">在这个信息爆炸的时代，深度阅读变得越来越珍贵。本文探讨如何在碎片化阅读盛行的当下，培养深度阅读的习惯...</p>
+                            <div class="article-meta">
+                                <span>2026年3月</span>
+                                <span class="article-readtime">8分钟阅读</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                
+                <!-- Article 2 -->
+                <article class="article-card">
+                    <a href="article-2.html" class="article-link">
+                        <div class="article-image" style="background: linear-gradient(135deg, #6B7B8C, #8B9BA8);">
+                            <span class="article-tag">专题</span>
+                        </div>
+                        <div class="article-content">
+                            <span class="article-category">书店故事</span>
+                            <h2 class="article-title">浪潮与岛屿：Wavecrest的诞生</h2>
+                            <p class="article-excerpt">每个书店都有自己的故事。Wavecrest Bookstore 诞生于一个关于连接与阅读的梦想，让我们一起回顾这段旅程...</p>
+                            <div class="article-meta">
+                                <span>2026年2月</span>
+                                <span class="article-readtime">12分钟阅读</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                
+                <!-- Article 3 -->
+                <article class="article-card">
+                    <a href="article-3.html" class="article-link">
+                        <div class="article-image" style="background: linear-gradient(135deg, #A5B5A0, #B8C4A8);"></div>
+                        <div class="article-content">
+                            <span class="article-category">书单推荐</span>
+                            <h2 class="article-title">春日治愈书单：10本书带你逃离喧嚣</h2>
+                            <p class="article-excerpt">春天是阅读的好时节。我们精心挑选了10本治愈系书籍，陪伴你度过这个温暖的季节...</p>
+                            <div class="article-meta">
+                                <span>2026年3月</span>
+                                <span class="article-readtime">6分钟阅读</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                
+                <!-- Article 4 -->
+                <article class="article-card">
+                    <a href="article-4.html" class="article-link">
+                        <div class="article-image" style="background: linear-gradient(135deg, #9A8B7A, #B5A89A);"></div>
+                        <div class="article-content">
+                            <span class="article-category">作家访谈</span>
+                            <h2 class="article-title">对话村上春树：跑步、写作与爵士乐</h2>
+                            <p class="article-excerpt">在本次独家访谈中，村上春树与我们分享了他的创作理念、跑步哲学，以及对当代文学的看法...</p>
+                            <div class="article-meta">
+                                <span>2026年2月</span>
+                                <span class="article-readtime">15分钟阅读</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                
+                <!-- Article 5 -->
+                <article class="article-card">
+                    <a href="article-5.html" class="article-link">
+                        <div class="article-image" style="background: linear-gradient(135deg, #7A8B99, #9AABBA);"></div>
+                        <div class="article-content">
+                            <span class="article-category">阅读空间</span>
+                            <h2 class="article-title">设计一间理想的书房：MUJI美学的启示</h2>
+                            <p class="article-excerpt">从MUJI的设计理念出发，探讨如何打造一间既实用又充满美感的私人阅读空间...</p>
+                            <div class="article-meta">
+                                <span>2026年1月</span>
+                                <span class="article-readtime">10分钟阅读</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                
+                <!-- Article 6 -->
+                <article class="article-card">
+                    <a href="article-6.html" class="article-link">
+                        <div class="article-image" style="background: linear-gradient(135deg, #B8A090, #CAB8A8);"></div>
+                        <div class="article-content">
+                            <span class="article-category">读书心得</span>
+                            <h2 class="article-title">重读经典：为什么我们需要反复阅读一本书</h2>
+                            <p class="article-excerpt">经典之所以为经典，在于每次阅读都能带来新的感悟。本文探讨重读的意义与方法...</p>
+                            <div class="article-meta">
+                                <span>2026年1月</span>
+                                <span class="article-readtime">7分钟阅读</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <svg class="footer-logo" viewBox="0 0 48 32" fill="none">
+                        <path d="M4 16C4 16 12 8 20 16C28 24 36 16 44 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M4 24C4 24 12 16 20 24C28 32 36 24 44 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+                    </svg>
+                    <p class="footer-slogan">没有人是一座孤岛。</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">首页</a>
+                    <a href="articles.html">文章</a>
+                    <a href="search.html">搜索</a>
+                    <a href="about.html">关于</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Wavecrest Bookstore. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile nav toggle
+        document.getElementById('navToggle')?.addEventListener('click', () => {
+            const navIcons = document.querySelector('.nav-icons');
+            navIcons.classList.toggle('show');
+        });
+    </script>
+</body>
+</html>

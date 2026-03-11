@@ -6,15 +6,14 @@
     <title>Wavecrest Bookstore｜没有人是一座孤岛</title>
     <meta name="description" content="Wavecrest Bookstore - 让阅读成为连接我们的浪潮">
     
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600&family=Noto+Serif+SC:wght@400;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Navigation - Icon Only -->
     <nav class="nav" id="nav">
         <div class="nav-container">
             <a href="index.html" class="logo">
@@ -22,21 +21,36 @@
                     <path d="M4 16C4 16 12 8 20 16C28 24 36 16 44 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
                     <path d="M4 24C4 24 12 16 20 24C28 32 36 24 44 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
                 </svg>
-                <span class="logo-text">Wavecrest</span>
             </a>
-            <div class="nav-search">
-                <input type="text" id="searchInput" placeholder="搜索书名、作者...">
-                <button class="search-btn" aria-label="搜索">
+            
+            <div class="nav-icons">
+                <a href="index.html" class="nav-icon active" title="首页">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9,22 9,12 15,12 15,22"/>
+                    </svg>
+                </a>
+                <a href="articles.html" class="nav-icon" title="文章">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                    </svg>
+                </a>
+                <a href="search.html" class="nav-icon" title="搜索">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <circle cx="11" cy="11" r="8"/>
                         <path d="M21 21l-4.35-4.35"/>
                     </svg>
-                </button>
+                </a>
+                <a href="about.html" class="nav-icon" title="关于">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="16" x2="12" y2="12"/>
+                        <line x1="12" y1="8" x2="12.01" y2="8"/>
+                    </svg>
+                </a>
             </div>
-            <ul class="nav-links">
-                <li><a href="search.html">搜索</a></li>
-                <li><a href="about.html">关于</a></li>
-            </ul>
+            
             <button class="nav-toggle" id="navToggle" aria-label="切换菜单">
                 <span></span>
                 <span></span>
@@ -45,21 +59,22 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero hero-compact" id="hero">
-        <div class="wave-bg">
-            <svg class="wave wave-1" viewBox="0 0 1440 320" preserveAspectRatio="none">
-                <path fill="#E8E4DF" fill-opacity="0.4" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-            </svg>
-            <svg class="wave wave-2" viewBox="0 0 1440 320" preserveAspectRatio="none">
-                <path fill="#D4CEC7" fill-opacity="0.3" d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,106.7C672,117,768,171,864,186.7C960,203,1056,181,1152,165.3C1248,149,1344,139,1392,133.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-            </svg>
+    <!-- Hero Carousel -->
+    <section class="hero-carousel" id="heroCarousel">
+        <div class="carousel-container" id="carouselContainer">
+            <!-- Carousel items will be loaded by JS -->
         </div>
-        <div class="hero-content">
-            <h1 class="hero-title">Wavecrest Bookstore</h1>
-            <p class="hero-slogan">没有人是一座孤岛。</p>
-            <p class="hero-subtitle">让阅读成为连接我们的浪潮</p>
-        </div>
+        <div class="carousel-dots" id="carouselDots"></div>
+        <button class="carousel-btn carousel-prev" id="carouselPrev">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 18l-6-6 6-6"/>
+            </svg>
+        </button>
+        <button class="carousel-btn carousel-next" id="carouselNext">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 18l6-6-6-6"/>
+            </svg>
+        </button>
     </section>
 
     <!-- Book Library Sections -->
@@ -72,7 +87,7 @@
                         <span class="section-tag">New Arrivals</span>
                         <h2 class="section-title">最近新增</h2>
                     </div>
-                    <a href="search.html" class="section-more">查看全部 ></a>
+                    <a href="search.html" class="section-more">查看全部 ›</a>
                 </div>
                 <div class="books-scroll" id="recentScroll">
                     <button class="scroll-btn scroll-prev" aria-label="向左滑动">
@@ -98,7 +113,7 @@
                         <span class="section-tag">Editor's Choice</span>
                         <h2 class="section-title">编辑精选</h2>
                     </div>
-                    <a href="search.html" class="section-more">查看全部 ></a>
+                    <a href="search.html" class="section-more">查看全部 ›</a>
                 </div>
                 <div class="books-scroll" id="featuredScroll">
                     <button class="scroll-btn scroll-prev" aria-label="向左滑动">
@@ -124,7 +139,7 @@
                         <span class="section-tag">Popular</span>
                         <h2 class="section-title">热门借阅</h2>
                     </div>
-                    <a href="search.html" class="section-more">查看全部 ></a>
+                    <a href="search.html" class="section-more">查看全部 ›</a>
                 </div>
                 <div class="books-scroll" id="popularScroll">
                     <button class="scroll-btn scroll-prev" aria-label="向左滑动">
@@ -150,7 +165,7 @@
                         <span class="section-tag">Classics</span>
                         <h2 class="section-title">经典重温</h2>
                     </div>
-                    <a href="search.html" class="section-more">查看全部 ></a>
+                    <a href="search.html" class="section-more">查看全部 ›</a>
                 </div>
                 <div class="books-scroll" id="classicScroll">
                     <button class="scroll-btn scroll-prev" aria-label="向左滑动">
@@ -182,6 +197,7 @@
                 </div>
                 <div class="footer-links">
                     <a href="index.html">首页</a>
+                    <a href="articles.html">文章</a>
                     <a href="search.html">搜索</a>
                     <a href="about.html">关于</a>
                 </div>
