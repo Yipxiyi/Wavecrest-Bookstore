@@ -9,7 +9,7 @@ class BookstoreApp {
                 tag: '专题',
                 title: '村上春树的夏天',
                 desc: '探索村上春树作品中的夏日意象与孤独美学',
-                color: '#8B7355',
+                image: 'https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=1800&q=80',
                 link: 'article-detail.html?id=1'
             },
             {
@@ -17,7 +17,7 @@ class BookstoreApp {
                 tag: '书单',
                 title: '春日治愈系书单',
                 desc: '十本让心灵平静的好书，陪你度过温暖春日',
-                color: '#A89078',
+                image: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1800&q=80',
                 link: 'article-detail.html?id=2'
             },
             {
@@ -25,7 +25,7 @@ class BookstoreApp {
                 tag: '访谈',
                 title: '与译者对话',
                 desc: '翻译的艺术：如何在两种语言间传递文学之美',
-                color: '#6B6B6B',
+                image: 'https://images.unsplash.com/photo-1455885666463-9e84d871a46b?auto=format&fit=crop&w=1800&q=80',
                 link: 'article-detail.html?id=3'
             }
         ];
@@ -60,7 +60,7 @@ class BookstoreApp {
 
         // Render slides
         container.innerHTML = this.carouselData.map(item => `
-            <div class="carousel-item" data-link="${item.link}" style="background: linear-gradient(135deg, ${item.color}20, ${item.color}05);">
+            <div class="carousel-item" data-link="${item.link}" style="background-image: url('${item.image}');">
                 <div class="carousel-content">
                     <div class="carousel-card">
                         <div class="carousel-tag">${item.tag}</div>
