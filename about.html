@@ -8,7 +8,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600&family=Noto+Serif+SC:wght@400;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -34,6 +34,7 @@
             </div>
             <ul class="nav-links">
                 <li><a href="index.html">首页</a></li>
+                <li><a href="search.html">搜索</a></li>
                 <li><a href="about.html" class="active">关于</a></li>
             </ul>
             <button class="nav-toggle" id="navToggle" aria-label="切换菜单">
@@ -48,14 +49,6 @@
     <main class="about-page">
         <!-- Hero Section -->
         <section class="about-hero">
-            <div class="wave-bg">
-                <svg class="wave wave-1" viewBox="0 0 1440 320" preserveAspectRatio="none">
-                    <path fill="#E8E4DF" fill-opacity="0.4" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-                </svg>
-                <svg class="wave wave-2" viewBox="0 0 1440 320" preserveAspectRatio="none">
-                    <path fill="#D4CEC7" fill-opacity="0.3" d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,106.7C672,117,768,171,864,186.7C960,203,1056,181,1152,165.3C1248,149,1344,139,1392,133.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-                </svg>
-            </div>
             <div class="container">
                 <div class="about-hero-content">
                     <svg class="about-logo" viewBox="0 0 64 40" fill="none">
@@ -108,84 +101,81 @@
                 
                 <div class="values-list">
                     <div class="value-card">
-                        <div class="value-number">01</div>
+                        <div class="value-icon">
+                            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="24" cy="24" r="20"/>
+                                <path d="M24 14v20M14 24h20"/>
+                            </svg>
+                        </div>
+                        <span class="value-number">01</span>
                         <h3>连接</h3>
-                        <p>让阅读建立人与世界的连结，每一页都是一座桥梁。我们相信，文字的力量能够跨越时空，连接不同的灵魂。</p>
+                        <p>让阅读建立人与世界的连结，每一页都是一座桥梁</p>
                     </div>
                     
                     <div class="value-card">
-                        <div class="value-number">02</div>
+                        <div class="value-icon">
+                            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M24 4v40M4 24h40"/>
+                                <circle cx="24" cy="24" r="8"/>
+                            </svg>
+                        </div>
+                        <span class="value-number">02</span>
                         <h3>浪潮精神</h3>
-                        <p>关注时代思潮、思想浪花，永远保持对新鲜事物的好奇。我们不断寻找新的声音，带来前沿的思考。</p>
+                        <p>关注时代思潮、思想浪花，永远保持对新鲜事物的好奇</p>
                     </div>
                     
                     <div class="value-card">
-                        <div class="value-number">03</div>
+                        <div class="value-icon">
+                            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M24 4C12 4 4 12 4 24s8 20 20 20 20-8 20-20S36 4 24 4z"/>
+                                <path d="M24 14v10l8 8"/>
+                            </svg>
+                        </div>
+                        <span class="value-number">03</span>
                         <h3>温度</h3>
-                        <p>书籍与服务都柔和、有呼吸感，像海风一样温暖。我们希望每一位访客都能在这里找到归属感。</p>
+                        <p>书籍与服务都柔和、有呼吸感，像海风一样温暖</p>
                     </div>
                     
                     <div class="value-card">
-                        <div class="value-number">04</div>
-                        <h3>美与秩序</div>
-                        <p>空间、视觉、选品的自然和谐，为阅读创造最佳氛围。我们相信，美的环境能够滋养心灵。</p>
+                        <div class="value-icon">
+                            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="8" y="8" width="32" height="32" rx="4"/>
+                                <path d="M8 16h32M16 8v32"/>
+                            </svg>
+                        </div>
+                        <span class="value-number">04</span>
+                        <h3>美与秩序</h3>
+                        <p>空间、视觉、选品的自然和谐，为阅读创造最佳氛围</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Space & Service -->
+        <!-- Space & Experience -->
         <section class="about-section">
             <div class="container">
                 <div class="about-section-header">
                     <span class="section-tag">Experience</span>
-                    <h2 class="section-title">空间与服务</h2>
+                    <h2 class="section-title">空间体验</h2>
                 </div>
                 
-                <div class="features-grid">
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="6" y="8" width="36" height="32" rx="2"/>
-                                <path d="M6 16h36"/>
-                                <path d="M16 28h16"/>
-                            </svg>
-                        </div>
+                <div class="experience-grid">
+                    <div class="experience-item">
+                        <div class="experience-image" style="background: linear-gradient(135deg, #E8E4DF, #D4CEC7);"></div>
                         <h3>静谧阅读空间</h3>
-                        <p>精心设计的阅读角落，充足的自然光线，舒适的座椅，让您沉浸在书的世界中。</p>
+                        <p>精心设计的阅读角落，充足的自然光线，舒适的座椅，让您沉浸在书的世界中</p>
                     </div>
                     
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <circle cx="24" cy="24" r="20"/>
-                                <path d="M24 14v10l7 7"/>
-                            </svg>
-                        </div>
+                    <div class="experience-item">
+                        <div class="experience-image" style="background: linear-gradient(135deg, #C4B8A8, #B5A89A);"></div>
                         <h3>精选书单</h3>
-                        <p>专业选书团队每月精选，涵盖文学、艺术、设计、生活美学等多个领域。</p>
+                        <p>专业选书团队每月精选，涵盖文学、艺术、设计、生活美学等多个领域</p>
                     </div>
                     
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M42 24c0 9.94-8.06 18-18 18S6 33.94 6 24 14.06 6 24 6s18 8.06 18 18z"/>
-                                <path d="M24 30a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"/>
-                            </svg>
-                        </div>
+                    <div class="experience-item">
+                        <div class="experience-image" style="background: linear-gradient(135deg, #A89078, #9B8B7A);"></div>
                         <h3>文化活动</h3>
-                        <p>定期举办读书会、作家分享、艺术展览，打造思想交流的平台。</p>
-                    </div>
-                    
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M40 44V20L24 8 8 20v24"/>
-                                <rect x="18" y="28" width="12" height="16"/>
-                            </svg>
-                        </div>
-                        <h3>咖啡与茶</h3>
-                        <p>精选咖啡与茶品，在阅读间隙享受片刻宁静，让思绪沉淀。</p>
+                        <p>定期举办读书会、作家分享、艺术展览，打造思想交流的平台</p>
                     </div>
                 </div>
             </div>
@@ -230,10 +220,9 @@
                         
                         <div class="contact-item-large">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                                <circle cx="9" cy="7" r="4"/>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
                             </svg>
                             <div>
                                 <span class="contact-label">社交媒体</span>
@@ -259,6 +248,7 @@
                 </div>
                 <div class="footer-links">
                     <a href="index.html">首页</a>
+                    <a href="search.html">搜索</a>
                     <a href="about.html">关于</a>
                 </div>
             </div>

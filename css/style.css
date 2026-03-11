@@ -2,8 +2,8 @@
 
 :root {
     /* Apple System Colors + MUJI Warmth */
-    --bg: #FBFBF9;
-    --bg-warm: #F7F6F3;
+    --bg: #FFFFFF;
+    --bg-warm: #FAFAFA;
     --surface: #FFFFFF;
     
     /* Text - Pure Apple hierarchy */
@@ -60,7 +60,7 @@ body {
     position: fixed;
     inset: 0 0 auto 0;
     z-index: 100;
-    background: rgba(251,251,249,0.8);
+    background: rgba(255,255,255,0.85);
     backdrop-filter: blur(20px) saturate(180%);
     border-bottom: 1px solid var(--hairline);
 }
@@ -179,7 +179,7 @@ body {
 
 /* Section */
 .section { padding: var(--xxl) 0; }
-.section-alt { background: var(--bg-warm); }
+.section-alt { background: var(--bg); }
 
 .container {
     max-width: 1024px;
@@ -368,7 +368,7 @@ body {
 
 /* Book detail */
 .book-detail-page { padding-top: 80px; }
-.book-detail-hero { padding: var(--xl) 0; background: var(--bg-warm); }
+.book-detail-hero { padding: var(--xl) 0; background: var(--bg); }
 
 .book-detail-main {
     display: grid;
@@ -458,7 +458,7 @@ body {
 .btn-primary { background: var(--label); color: var(--bg); }
 .btn-primary:hover { background: var(--secondary); }
 
-.btn-secondary { background: var(--bg-warm); color: var(--label); }
+.btn-secondary { background: var(--bg); color: var(--label); }
 .btn-secondary:hover { background: var(--hairline); }
 
 .book-detail-meta-grid {
@@ -488,7 +488,7 @@ body {
     font-style: italic;
     color: var(--muji);
     padding: var(--md);
-    background: var(--bg-warm);
+    background: var(--bg);
     border-radius: var(--r-sm);
     margin-bottom: var(--lg);
 }
@@ -499,14 +499,14 @@ body {
 
 .book-detail-tag {
     padding: 6px 16px;
-    background: var(--bg-warm);
+    background: var(--bg);
     border-radius: 16px;
     font-size: 13px;
     color: var(--secondary);
 }
 
 /* Sidebar */
-.sidebar-section { padding: var(--md); background: var(--bg-warm); border-radius: var(--r-md); }
+.sidebar-section { padding: var(--md); background: var(--bg); border-radius: var(--r-md); }
 .sidebar-title { font-family: var(--font-display); font-size: 17px; margin-bottom: var(--md); }
 .sidebar-books { display: flex; flex-direction: column; gap: var(--md); }
 
@@ -531,7 +531,7 @@ body {
 
 /* About */
 .about-page { padding-top: 80px; }
-.about-hero { padding: var(--xxl) 0; background: var(--bg-warm); text-align: center; }
+.about-hero { padding: var(--xxl) 0; background: var(--bg); text-align: center; }
 
 .about-logo { width: 64px; height: 40px; margin: 0 auto var(--md); opacity: 0.8; }
 
@@ -625,7 +625,7 @@ body {
 .footer {
     padding: var(--xl) 0 var(--lg);
     border-top: 1px solid var(--hairline);
-    background: var(--bg-warm);
+    background: var(--bg);
 }
 
 .footer-content {
@@ -675,4 +675,316 @@ body {
     .books-scroll { margin: 0 calc(-1 * var(--sm)); padding: 0 var(--sm); }
     .books-scroll-container .book-card { flex: 0 0 120px; }
     .value-card { padding: var(--md); }
+}
+
+/* About Page Enhanced Styles */
+
+.about-hero {
+    padding: 140px 0 100px;
+    text-align: center;
+    background: linear-gradient(180deg, var(--bg-warm) 0%, var(--bg) 100%);
+}
+
+.about-logo {
+    width: 80px;
+    height: 52px;
+    margin: 0 auto 24px;
+    color: var(--muji);
+}
+
+.about-title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, 56px);
+    font-weight: 500;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+}
+
+.about-slogan {
+    font-family: var(--font-display);
+    font-size: 24px;
+    color: var(--secondary);
+    letter-spacing: 2px;
+}
+
+/* Story Section */
+.about-section { padding: 100px 0; }
+
+.about-section-header {
+    text-align: center;
+    margin-bottom: 64px;
+}
+
+.about-section-header .section-tag {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muji);
+    margin-bottom: 12px;
+}
+
+.about-section-header .section-title {
+    font-family: var(--font-display);
+    font-size: 40px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+}
+
+.about-story {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.story-lead {
+    font-family: var(--font-display);
+    font-size: 28px;
+    line-height: 1.5;
+    color: var(--label);
+    margin-bottom: 48px;
+}
+
+.story-body {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--secondary);
+}
+
+.story-body p {
+    margin-bottom: 24px;
+}
+
+.story-body strong {
+    color: var(--label);
+    font-weight: 600;
+}
+
+.story-highlight {
+    font-family: var(--font-display);
+    font-size: 24px;
+    color: var(--muji);
+    margin: 48px 0;
+    font-style: italic;
+}
+
+.about-quote {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-style: italic;
+    color: var(--label);
+    margin-top: 64px;
+    padding-top: 48px;
+    border-top: 1px solid var(--hairline);
+    letter-spacing: -0.5px;
+}
+
+/* Values Section */
+.values-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.value-card {
+    text-align: center;
+    padding: 48px 32px;
+    background: var(--surface);
+    border-radius: 16px;
+    border: 1px solid var(--hairline);
+    transition: all 0.3s;
+}
+
+.value-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-elevate);
+    border-color: transparent;
+}
+
+.value-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 20px;
+    color: var(--muji);
+}
+
+.value-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.value-number {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--tertiary);
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.value-card h3 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.value-card p {
+    font-size: 15px;
+    color: var(--secondary);
+    line-height: 1.6;
+}
+
+/* Experience Section */
+.experience-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+.experience-item {
+    text-align: center;
+}
+
+.experience-image {
+    width: 100%;
+    aspect-ratio: 4/3;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-float);
+}
+
+.experience-item h3 {
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.experience-item p {
+    font-size: 15px;
+    color: var(--secondary);
+    line-height: 1.6;
+}
+
+/* Contact Section */
+.contact-intro {
+    text-align: center;
+    max-width: 480px;
+    margin: 0 auto 48px;
+}
+
+.contact-lead {
+    font-family: var(--font-display);
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.contact-intro p:last-child {
+    font-size: 17px;
+    color: var(--secondary);
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contact-item-large {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    padding: 40px 24px;
+    background: var(--surface);
+    border-radius: 16px;
+    border: 1px solid var(--hairline);
+    transition: all 0.3s;
+}
+
+.contact-item-large:hover {
+    border-color: var(--muji-light);
+    box-shadow: var(--shadow-float);
+}
+
+.contact-item-large svg {
+    width: 28px;
+    height: 28px;
+    color: var(--muji);
+}
+
+.contact-item-large > div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.contact-label {
+    font-size: 11px;
+    color: var(--tertiary);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+}
+
+.contact-value {
+    font-size: 15px;
+    color: var(--label);
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .values-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .experience-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .about-hero {
+        padding: 120px 0 80px;
+    }
+    
+    .about-title {
+        font-size: 36px;
+    }
+    
+    .about-slogan {
+        font-size: 18px;
+    }
+    
+    .about-section {
+        padding: 64px 0;
+    }
+    
+    .about-section-header .section-title {
+        font-size: 32px;
+    }
+    
+    .story-lead {
+        font-size: 22px;
+    }
+    
+    .about-quote {
+        font-size: 24px;
+    }
+    
+    .values-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .value-card {
+        padding: 32px 24px;
+    }
 }
