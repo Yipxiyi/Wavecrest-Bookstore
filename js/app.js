@@ -152,24 +152,51 @@ class BookstoreApp {
     }
 
     renderBookCard(book) {
-        // 判断封面是颜色还是图片URL
         const isImageUrl = book.cover && (book.cover.startsWith('http://') || book.cover.startsWith('https://'));
+        const coverId = `cover-${book.id}`;
         
-        const coverStyle = isImageUrl 
-            ? `background-image: url('${book.cover}'); background-color: transparent;`
-            : `background-color: ${book.cover}`;
-        
-        const placeholderHtml = isImageUrl 
-            ? ''
-            : `<div class="book-cover-placeholder">
-                    <div class="book-cover-title">${book.title}</div>
-                    <div class="book-cover-author">${book.author}</div>
-                </div>`;
+        if (isImageUrl) {
+            // 使用 img 标签预加载检测
+            setTimeout(() => {
+                const img = new Image();
+                img.onload = () => {
+                    const el = document.getElementById(coverId);
+                    if (el) el.style.backgroundImage = `url('${book.cover}')`;
+                };
+                img.onerror = () => {
+                    const el = document.getElementById(coverId);
+                    if (el) {
+                        el.style.backgroundImage = '';
+                        el.style.backgroundColor = '#9B8B7A';
+                        el.innerHTML = `<div class="book-cover-placeholder"><div class="book-cover-title">${book.title.substring(0,6)}...</div><div class="book-cover-author">${book.author}</div></div>`;
+                    }
+                };
+                img.src = book.cover;
+            }, 0);
+            
+            return `
+                <article class="book-card" data-book-id="${book.id}">
+                    <div class="book-cover" id="${coverId}" style="background-color: var(--bg-secondary);"></div>
+                    <div class="book-info">
+                        <h3 class="book-title">${book.title}</h3>
+                        <p class="book-author">${book.author}</p>
+                        <div class="book-meta">
+                            <span class="book-rating">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                ${book.rating}
+                            </span>
+                        </div>
+                    </div>
+                </article>`;
+        }
         
         return `
             <article class="book-card" data-book-id="${book.id}">
-                <div class="book-cover" style="${coverStyle}">
-                    ${placeholderHtml}
+                <div class="book-cover" style="background-color: ${book.cover}">
+                    <div class="book-cover-placeholder">
+                        <div class="book-cover-title">${book.title}</div>
+                        <div class="book-cover-author">${book.author}</div>
+                    </div>
                 </div>
                 <div class="book-info">
                     <h3 class="book-title">${book.title}</h3>
@@ -181,8 +208,7 @@ class BookstoreApp {
                         </span>
                     </div>
                 </div>
-            </article>
-        `;
+            </article>`;
     }
 
     setupScrollButtons() {
@@ -212,6 +238,9 @@ class BookstoreApp {
         document.getElementById('carouselPrev')?.addEventListener('click', () => this.prevSlide());
         document.getElementById('carouselNext')?.addEventListener('click', () => this.nextSlide());
 
+        // Touch/Swipe support for carousel
+        this.setupCarouselSwipe();
+
         // Mobile nav toggle
         const navToggle = document.getElementById('navToggle');
         const navIcons = document.querySelector('.nav-icons');
@@ -231,6 +260,82 @@ class BookstoreApp {
                 navIcons.style.borderBottom = '1px solid var(--hairline)';
                 navIcons.style.boxShadow = 'var(--shadow-md)';
             }
+        });
+    }
+
+    setupCarouselSwipe() {
+        const container = document.getElementById('carouselContainer');
+        if (!container) return;
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let isDragging = false;
+
+        const handleTouchStart = (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            isDragging = true;
+        };
+
+        const handleTouchMove = (e) => {
+            if (!isDragging) return;
+            touchEndX = e.changedTouches[0].screenX;
+        };
+
+        const handleTouchEnd = () => {
+            if (!isDragging) return;
+            isDragging = false;
+            
+            const diff = touchStartX - touchEndX;
+            const threshold = 50; // 滑动阈值
+
+            if (Math.abs(diff) > threshold) {
+                if (diff > 0) {
+                    // 向左滑动 -> 下一张
+                    this.nextSlide();
+                } else {
+                    // 向右滑动 -> 上一张
+                    this.prevSlide();
+                }
+            }
+        };
+
+        // 触摸事件
+        container.addEventListener('touchstart', handleTouchStart, { passive: true });
+        container.addEventListener('touchmove', handleTouchMove, { passive: true });
+        container.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+        // 鼠标拖拽支持（桌面端）
+        let mouseStartX = 0;
+        let isMouseDown = false;
+
+        container.addEventListener('mousedown', (e) => {
+            mouseStartX = e.screenX;
+            isMouseDown = true;
+        });
+
+        container.addEventListener('mousemove', (e) => {
+            if (!isMouseDown) return;
+            touchEndX = e.screenX;
+        });
+
+        container.addEventListener('mouseup', () => {
+            if (!isMouseDown) return;
+            isMouseDown = false;
+            
+            const diff = mouseStartX - touchEndX;
+            const threshold = 50;
+
+            if (Math.abs(diff) > threshold) {
+                if (diff > 0) {
+                    this.nextSlide();
+                } else {
+                    this.prevSlide();
+                }
+            }
+        });
+
+        container.addEventListener('mouseleave', () => {
+            isMouseDown = false;
         });
     }
 }
