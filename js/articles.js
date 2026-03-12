@@ -51,7 +51,7 @@ class ArticlesPage {
         }
 
         container.innerHTML = featured.map(article => `
-            <article class="featured-card" onclick="window.location.href='${article.link}'">
+            <article class="featured-card" onclick="window.location.href='article-detail.html?id=${article.id}'">
                 <div class="featured-card-image" style="background-image: url('${article.image}')">
                     <span class="featured-card-tag">${article.tag}</span>
                 </div>
@@ -84,7 +84,7 @@ class ArticlesPage {
         }
 
         container.innerHTML = filtered.map(article => `
-            <article class="article-item" onclick="window.location.href='${article.link}'">
+            <article class="article-item" onclick="window.location.href='article-detail.html?id=${article.id}'">
                 <div class="article-item-image" style="background-image: url('${article.image}')">
                     <span class="article-item-tag">${article.tag}</span>
                 </div>

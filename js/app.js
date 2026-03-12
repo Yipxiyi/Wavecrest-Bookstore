@@ -155,18 +155,22 @@ class BookstoreApp {
         // 判断封面是颜色还是图片URL
         const isImageUrl = book.cover && (book.cover.startsWith('http://') || book.cover.startsWith('https://'));
         
-        const coverHtml = isImageUrl 
-            ? `<div class="book-cover" style="background-image: url('${book.cover}'); background-size: cover; background-position: center;"></div>`
-            : `<div class="book-cover" style="background-color: ${book.cover}">
-                    <div class="book-cover-placeholder">
-                        <div class="book-cover-title">${book.title}</div>
-                        <div class="book-cover-author">${book.author}</div>
-                    </div>
+        const coverStyle = isImageUrl 
+            ? `background-image: url('${book.cover}'); background-color: transparent;`
+            : `background-color: ${book.cover}`;
+        
+        const placeholderHtml = isImageUrl 
+            ? ''
+            : `<div class="book-cover-placeholder">
+                    <div class="book-cover-title">${book.title}</div>
+                    <div class="book-cover-author">${book.author}</div>
                 </div>`;
         
         return `
             <article class="book-card" data-book-id="${book.id}">
-                ${coverHtml}
+                <div class="book-cover" style="${coverStyle}">
+                    ${placeholderHtml}
+                </div>
                 <div class="book-info">
                     <h3 class="book-title">${book.title}</h3>
                     <p class="book-author">${book.author}</p>

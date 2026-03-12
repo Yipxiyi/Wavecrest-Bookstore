@@ -103,7 +103,20 @@ body { font-family: var(--font-text); font-size: 16px; line-height: 1.5; color: 
 .book-card:hover { transform: translateY(-4px); }
 .book-card:hover .book-cover { box-shadow: var(--shadow-lg); }
 
-.book-cover { aspect-ratio: 3/4; border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 12px; box-shadow: var(--shadow-sm); transition: box-shadow 0.2s; }
+.book-cover { 
+    width: 130px; 
+    height: 173px; 
+    aspect-ratio: 3/4; 
+    border-radius: var(--radius-sm); 
+    overflow: hidden; 
+    margin-bottom: 12px; 
+    box-shadow: var(--shadow-sm); 
+    transition: box-shadow 0.2s;
+    background-color: var(--bg-secondary);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 .book-cover-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; text-align: center; }
 .book-cover-title { font-family: var(--font-display); font-size: 13px; font-weight: 500; color: #fff; line-height: 1.4; margin-bottom: 4px; text-shadow: 0 2px 8px rgba(0,0,0,0.3); }
 .book-cover-author { font-size: 10px; color: rgba(255,255,255,0.9); }

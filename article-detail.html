@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章详情 - Wavecrest Bookstore</title>
+    <meta name="description" content="Wavecrest Bookstore 文章详情">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600&family=Noto+Serif+SC:wght@400;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Markdown Renderer -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/article-detail.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <svg class="logo-icon" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 16C4 16 12 8 20 16C28 24 36 16 44 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M4 24C4 24 12 16 20 24C28 32 36 24 44 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+                </svg>
+            </a>
+            
+            <div class="nav-icons">
+                <a href="index.html" class="nav-icon" title="首页">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9,22 9,12 15,12 15,22"/>
+                    </svg>
+                </a>
+                <a href="articles.html" class="nav-icon" title="文章">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                    </svg>
+                </a>
+                <a href="search.html" class="nav-icon" title="搜索">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="M21 21l-4.35-4.35"/>
+                    </svg>
+                </a>
+                <a href="about.html" class="nav-icon" title="关于">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="16" x2="12" y2="12"/>
+                        <line x1="12" y1="8" x2="12.01" y2="8"/>
+                    </svg>
+                </a>
+            </div>
+            
+            <button class="nav-toggle" id="navToggle" aria-label="切换菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header" id="articleHeader">
+        <div class="article-header-bg" id="articleHeaderBg"></div>
+        <div class="article-header-content">
+            <div class="container">
+                <span class="article-header-tag" id="articleTag">加载中...</span>
+                <h1 class="article-header-title" id="articleTitle">加载中...</h1>
+                <div class="article-header-meta" id="articleMeta">
+                    <span id="articleDate"></span>
+                    <span id="articleReadTime"></span>
+                    <span id="articleCategory"></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Article Content -->
+    <main class="article-main">
+        <div class="container">
+            <div class="article-layout">
+                <!-- Article Body -->
+                <article class="article-body">
+                    <div class="article-content markdown-body" id="articleContent">
+                        <p class="loading">正在加载文章内容...</p>
+                    </div>
+                    
+                    <!-- Article Footer -->
+                    <footer class="article-footer">
+                        <div class="article-tags" id="articleTags"></div>
+                        <div class="article-share">
+                            <span>分享文章</span>
+                            <button onclick="shareArticle()" class="share-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="18" cy="5" r="3"/>
+                                    <circle cx="6" cy="12" r="3"/>
+                                    <circle cx="18" cy="19" r="3"/>
+                                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </footer>
+                </article>
+
+                <!-- Sidebar -->
+                <aside class="article-sidebar">
+                    <!-- Author Widget -->
+                    <div class="sidebar-widget author-widget" id="authorWidget">
+                        <h3 class="widget-title">关于本书</h3>
+                        <div class="author-book" id="relatedBook">
+                            <!-- Book info loaded by JS -->
+                        </div>
+                    </div>
+                    
+                    <!-- Related Articles -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">相关文章</h3>
+                        <div class="related-articles" id="relatedArticles">
+                            <!-- Loaded by JS -->
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <svg class="footer-logo" viewBox="0 0 48 32" fill="none">
+                        <path d="M4 16C4 16 12 8 20 16C28 24 36 16 44 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M4 24C4 24 12 16 20 24C28 32 36 24 44 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+                    </svg>
+                    <p class="footer-slogan">没有人是一座孤岛。</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">首页</a>
+                    <a href="articles.html">文章</a>
+                    <a href="search.html">搜索</a>
+                    <a href="about.html">关于</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Wavecrest Bookstore. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/article-detail.js"></script>
+</body>
+</html>
