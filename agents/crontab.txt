@@ -1,0 +1,15 @@
+# NeoDB Sync Agent - Crontab 配置
+# 
+# 安装方法:
+# 1. 运行: crontab -e
+# 2. 粘贴以下内容
+# 3. 保存退出
+
+# 每4小时同步一次 NeoDB 数据
+0 */4 * * * cd ~/.openclaw/workspace/agents/neodb-sync-agent && ./run.sh >> ~/.openclaw/logs/neodb-sync.log 2>&1
+
+# 或者使用 npm 运行 (不自动提交Git)
+# 0 */4 * * * cd ~/.openclaw/workspace/agents/neodb-sync-agent && npm run sync >> sync.log 2>&1
+
+# 每天早上8点推送更新
+0 8 * * * cd ~/.openclaw/workspace/Wavecrest-Bookstore && git add data/ && git diff --cached --quiet || (git commit -m "🔄 Morning sync $(date +\%Y-\%m-\%d)" && git push)

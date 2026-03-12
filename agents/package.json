@@ -1,0 +1,18 @@
+{
+  "name": "neodb-sync-agent",
+  "version": "1.0.0",
+  "description": "NeoDB book data synchronization agent for Wavecrest Bookstore",
+  "main": "sync.js",
+  "scripts": {
+    "sync": "node sync.js",
+    "sync:dry": "node sync.js --dry-run",
+    "setup": "node -e \"require('./sync.js').then(a => a.init())\"",
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "sqlite3": "^5.1.6"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
