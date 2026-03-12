@@ -41,6 +41,16 @@ class BookstoreApp {
         this.init();
     }
 
+    // 图片代理 - 绕过防盗链
+    getProxiedImageUrl(url) {
+        if (!url) return '';
+        // 使用 images.weserv.nl 代理服务
+        if (url.includes('doubanio.com')) {
+            return `https://images.weserv.nl/?url=${encodeURIComponent(url)}`;
+        }
+        return url;
+    }
+
     async init() {
         try {
             await this.loadData();
@@ -156,27 +166,15 @@ class BookstoreApp {
         const coverId = `cover-${book.id}`;
         
         if (isImageUrl) {
-            // 使用 img 标签预加载检测
-            setTimeout(() => {
-                const img = new Image();
-                img.onload = () => {
-                    const el = document.getElementById(coverId);
-                    if (el) el.style.backgroundImage = `url('${book.cover}')`;
-                };
-                img.onerror = () => {
-                    const el = document.getElementById(coverId);
-                    if (el) {
-                        el.style.backgroundImage = '';
-                        el.style.backgroundColor = '#9B8B7A';
-                        el.innerHTML = `<div class="book-cover-placeholder"><div class="book-cover-title">${book.title.substring(0,6)}...</div><div class="book-cover-author">${book.author}</div></div>`;
-                    }
-                };
-                img.src = book.cover;
-            }, 0);
+            // 使用代理绕过防盗链
+            const proxiedUrl = this.getProxiedImageUrl(book.cover);
             
             return `
                 <article class="book-card" data-book-id="${book.id}">
-                    <div class="book-cover" id="${coverId}" style="background-color: var(--bg-secondary);"></div>
+                    <div class="book-cover" id="${coverId}" 
+                         style="background-image: url('${proxiedUrl}'); background-size: cover; background-position: center;"
+                         onerror="this.style.backgroundImage=''; this.style.backgroundColor='#9B8B7A'; this.innerHTML='<div class=\'book-cover-placeholder\'><div class=\'book-cover-title\'>'+'${book.title.replace(/'/g, "\\'")}'.substring(0,6)+'...</div><div class=\'book-cover-author\'>'+'${book.author.replace(/'/g, "\\'")}'.substring(0,8)+'</div></div>'">
+                    </div>
                     <div class="book-info">
                         <h3 class="book-title">${book.title}</h3>
                         <p class="book-author">${book.author}</p>

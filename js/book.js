@@ -3,9 +3,32 @@
 class BookDetailPage {
     constructor() {
         this.books = [];
-        this.categories = {};
+        this.categories = {
+            'fiction': '小说',
+            'literature': '文学',
+            'art': '艺术',
+            'history': '历史',
+            'philosophy': '哲学',
+            'science': '科学',
+            'business': '商业',
+            'design': '设计',
+            'essay': '散文',
+            'nonfiction': '非虚构',
+            'technology': '科技',
+            'biography': '传记'
+        };
         this.currentBook = null;
         this.init();
+    }
+
+    // 图片代理 - 绕过防盗链
+    getProxiedImageUrl(url) {
+        if (!url) return '';
+        // 使用 images.weserv.nl 代理服务
+        if (url.includes('doubanio.com')) {
+            return `https://images.weserv.nl/?url=${encodeURIComponent(url)}`;
+        }
+        return url;
     }
 
     async init() {
@@ -25,14 +48,23 @@ class BookDetailPage {
             this.setupEventListeners();
         } catch (error) {
             console.error('Failed to initialize book detail:', error);
+            this.showNotFound();
         }
     }
 
     async loadData() {
-        const response = await fetch('data/books.json');
-        const data = await response.json();
-        this.books = data.books;
-        this.categories = data.categories;
+        try {
+            const response = await fetch('data/books.json');
+            const data = await response.json();
+            this.books = data.books || [];
+            // 如果 JSON 中有 categories 就使用，否则使用默认值
+            if (data.categories) {
+                this.categories = data.categories;
+            }
+        } catch (error) {
+            console.error('Failed to load books data:', error);
+            this.books = [];
+        }
     }
 
     loadBook(bookId) {
@@ -54,38 +86,79 @@ class BookDetailPage {
         document.getElementById('bookContent').style.display = 'block';
         document.getElementById('notFoundState').style.display = 'none';
 
+        // 判断封面是颜色还是图片URL
+        const isImageUrl = book.cover && (book.cover.startsWith('http://') || book.cover.startsWith('https://'));
+        
         // Cover section
         const coverEl = document.getElementById('bookCover');
-        coverEl.style.backgroundColor = book.cover;
+        
+        if (isImageUrl) {
+            // 使用代理绕过防盗链
+            const proxiedUrl = this.getProxiedImageUrl(book.cover);
+            
+            coverEl.style.backgroundImage = `url('${proxiedUrl}')`;
+            coverEl.style.backgroundSize = 'cover';
+            coverEl.style.backgroundPosition = 'center';
+            coverEl.style.backgroundColor = 'var(--bg-secondary)';
+            
+            // 图片加载失败时回退
+            coverEl.onerror = () => {
+                coverEl.style.backgroundImage = '';
+                coverEl.style.backgroundColor = '#9B8B7A';
+            };
+            
+            // 隐藏 placeholder
+            const placeholder = coverEl.querySelector('.book-cover-placeholder-large');
+            if (placeholder) placeholder.style.display = 'none';
+        } else {
+            coverEl.style.backgroundColor = book.cover;
+            coverEl.style.backgroundImage = '';
+            // 显示 placeholder
+            const placeholder = coverEl.querySelector('.book-cover-placeholder-large');
+            if (placeholder) placeholder.style.display = 'flex';
+        }
+        
         document.getElementById('coverTitle').textContent = book.title;
         document.getElementById('coverAuthor').textContent = book.author;
 
         // Breadcrumb
-        document.getElementById('categoryName').textContent = this.categories[book.category] || '其他';
+        const categoryName = this.categories[book.category] || '其他';
+        document.getElementById('categoryName').textContent = categoryName;
         document.getElementById('breadcrumbTitle').textContent = book.title;
 
         // Main info
         document.getElementById('bookTitle').textContent = book.title;
         document.getElementById('bookAuthor').textContent = book.author;
         document.getElementById('ratingValue').textContent = book.rating;
-        document.getElementById('reviewCount').textContent = `(${book.reviews}人评价)`;
-        document.getElementById('bookPrice').textContent = `¥${book.price.toFixed(2)}`;
+        document.getElementById('reviewCount').textContent = `(${book.reviews || 0}人评价)`;
+        document.getElementById('bookPrice').textContent = `¥${(book.price || 0).toFixed(2)}`;
 
         // Meta info
-        document.getElementById('metaPublisher').textContent = book.publisher;
-        document.getElementById('metaYear').textContent = `${book.year}年`;
-        document.getElementById('metaPages').textContent = `${book.pages}页`;
-        document.getElementById('metaCategory').textContent = this.categories[book.category] || '其他';
+        document.getElementById('metaPublisher').textContent = book.publisher || '-';
+        document.getElementById('metaYear').textContent = book.year ? `${book.year}年` : '-';
+        document.getElementById('metaPages').textContent = book.pages ? `${book.pages}页` : '-';
+        document.getElementById('metaCategory').textContent = categoryName;
 
         // Content sections
-        document.getElementById('bookHighlight').textContent = `"${book.highlight}"`;
-        document.getElementById('bookDescription').textContent = book.description;
+        const highlightEl = document.getElementById('bookHighlight');
+        if (book.highlight) {
+            highlightEl.textContent = `"${book.highlight}"`;
+            highlightEl.style.display = 'block';
+        } else {
+            highlightEl.style.display = 'none';
+        }
+        
+        document.getElementById('bookDescription').textContent = book.description || '暂无简介';
 
         // Tags
         const tagsContainer = document.getElementById('bookTags');
-        tagsContainer.innerHTML = book.tags.map(tag => 
-            `<span class="book-detail-tag">${tag}</span>`
-        ).join('');
+        if (book.tags && book.tags.length > 0) {
+            tagsContainer.innerHTML = book.tags.map(tag => 
+                `<span class="book-detail-tag">${tag}</span>`
+            ).join('');
+        } else {
+            tagsContainer.innerHTML = '<span style="color: var(--tertiary); font-size: 14px;">暂无标签</span>';
+        }
 
         // Related books (same category, excluding current)
         const relatedBooks = this.books
@@ -95,12 +168,14 @@ class BookDetailPage {
         this.renderRelatedBooks(relatedBooks);
 
         // Setup buy button
-        document.getElementById('buyBtn').addEventListener('click', () => {
+        const buyBtn = document.getElementById('buyBtn');
+        buyBtn.onclick = () => {
             alert(`已将《${book.title}》加入购物车`);
-        });
+        };
 
         // Setup share button
-        document.getElementById('shareBtn').addEventListener('click', () => {
+        const shareBtn = document.getElementById('shareBtn');
+        shareBtn.onclick = () => {
             if (navigator.share) {
                 navigator.share({
                     title: book.title,
@@ -109,34 +184,46 @@ class BookDetailPage {
                 });
             } else {
                 // Copy to clipboard
-                navigator.clipboard.writeText(window.location.href);
-                alert('链接已复制到剪贴板');
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert('链接已复制到剪贴板');
+                });
             }
-        });
+        };
     }
 
     renderRelatedBooks(relatedBooks) {
         const container = document.getElementById('relatedBooks');
         
         if (relatedBooks.length === 0) {
-            container.innerHTML = '<p style="color: var(--color-text-muted); font-size: 0.875rem;">暂无相关推荐</p>';
+            container.innerHTML = '<p style="color: var(--tertiary); font-size: 14px;">暂无相关推荐</p>';
             return;
         }
 
-        container.innerHTML = relatedBooks.map(book => `
-            <div class="sidebar-book" data-book-id="${book.id}">
-                <div class="sidebar-book-cover" style="background-color: ${book.cover}"></div>
-                <div class="sidebar-book-info">
-                    <div class="sidebar-book-title">${book.title}</div>
-                    <div class="sidebar-book-author">${book.author}</div>
+        container.innerHTML = relatedBooks.map(book => {
+            const isImageUrl = book.cover && (book.cover.startsWith('http://') || book.cover.startsWith('https://'));
+            const coverStyle = isImageUrl 
+                ? `background-image: url('${this.getProxiedImageUrl(book.cover)}'); background-size: cover; background-position: center;`
+                : `background-color: ${book.cover}`;
+            
+            return `
+                <div class="sidebar-book" data-book-id="${book.id}">
+                    <div class="sidebar-book-cover" 
+                         style="${coverStyle}"
+                         onerror="this.style.backgroundColor='#9B8B7A'">
+                    </div>
+                    <div class="sidebar-book-info">
+                        <div class="sidebar-book-title">${book.title}</div>
+                        <div class="sidebar-book-author">${book.author}</div>
+                    </div>
                 </div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
 
         // Add click handlers
-        container.querySelectorAll('.sidebar-book').forEach((el, index) => {
+        container.querySelectorAll('.sidebar-book').forEach((el) => {
             el.addEventListener('click', () => {
-                window.location.href = `book.html?id=${relatedBooks[index].id}`;
+                const bookId = el.dataset.bookId;
+                window.location.href = `book.html?id=${bookId}`;
             });
         });
     }
@@ -148,39 +235,24 @@ class BookDetailPage {
     }
 
     setupEventListeners() {
-        // Search
-        const searchInput = document.getElementById('searchInput');
-        const searchBtn = document.querySelector('.search-btn');
-
-        searchInput?.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && e.target.value.trim()) {
-                window.location.href = `search.html?q=${encodeURIComponent(e.target.value.trim())}`;
-            }
-        });
-
-        searchBtn?.addEventListener('click', () => {
-            const value = searchInput?.value.trim();
-            if (value) {
-                window.location.href = `search.html?q=${encodeURIComponent(value)}`;
-            }
-        });
-
         // Mobile nav
         const navToggle = document.getElementById('navToggle');
-        const navLinks = document.querySelector('.nav-links');
+        const navIcons = document.querySelector('.nav-icons');
 
         navToggle?.addEventListener('click', () => {
-            const isVisible = navLinks.style.display === 'flex';
-            navLinks.style.display = isVisible ? 'none' : 'flex';
+            const isVisible = navIcons.style.display === 'flex';
+            navIcons.style.display = isVisible ? 'none' : 'flex';
             if (!isVisible) {
-                navLinks.style.position = 'absolute';
-                navLinks.style.top = '100%';
-                navLinks.style.left = '0';
-                navLinks.style.right = '0';
-                navLinks.style.background = 'var(--color-bg)';
-                navLinks.style.flexDirection = 'column';
-                navLinks.style.padding = 'var(--space-md)';
-                navLinks.style.borderBottom = '1px solid var(--color-border)';
+                navIcons.style.position = 'absolute';
+                navIcons.style.top = '52px';
+                navIcons.style.left = '0';
+                navIcons.style.right = '0';
+                navIcons.style.background = 'var(--bg)';
+                navIcons.style.flexDirection = 'row';
+                navIcons.style.justifyContent = 'center';
+                navIcons.style.padding = '16px';
+                navIcons.style.borderBottom = '1px solid var(--hairline)';
+                navIcons.style.boxShadow = 'var(--shadow-md)';
             }
         });
     }
