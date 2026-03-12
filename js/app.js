@@ -6,35 +6,35 @@ class BookstoreApp {
         this.carouselData = [
             {
                 id: 1,
-                tag: '新书',
-                title: '哲学家们的真实人生',
-                desc: '从苏格拉底到尼采，十二位哲学家的真实人生故事，比八卦还有料的传记',
-                image: 'https://img1.doubanio.com/view/subject/l/public/s35418898.jpg',
-                link: 'article-detail.html?id=new-1'
+                tag: '新书速递',
+                title: '2026年春季新书',
+                desc: '从豆瓣精选21本即将出版的重磅新作，涵盖哲学、艺术、历史与科学。每一本都值得期待。',
+                image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=1800&q=80',
+                link: 'articles.html'
             },
             {
                 id: 2,
-                tag: '专题',
-                title: '被艺术史遗忘的女性',
-                desc: '15-19世纪欧洲女性艺术家群像，52位艺术家的生平与创作',
-                image: 'https://img3.doubanio.com/view/subject/l/public/s35394322.jpg',
-                link: 'article-detail.html?id=new-2'
+                tag: '编辑精选',
+                title: '哲学思考的另一种可能',
+                desc: '当哲学家卸下神圣光环，他们的人生比理论更有趣。从苏格拉底到尼采，看见思想背后的真实人性。',
+                image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1800&q=80',
+                link: 'article-detail.html?id=new-1'
             },
             {
                 id: 3,
-                tag: '推荐',
-                title: '寻访千年木构',
-                desc: '中国古建筑的匠心之旅，深入解读其蕴含的历史和人文信息',
-                image: 'https://img1.doubanio.com/view/subject/l/public/s35413829.jpg',
-                link: 'article-detail.html?id=new-3'
+                tag: '专题策划',
+                title: '被遗忘的女性艺术家',
+                desc: '艺术史不应只是男性的历史。52位欧洲女性艺术家的生平与创作，还原被遮蔽的艺术真相。',
+                image: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=1800&q=80',
+                link: 'article-detail.html?id=new-2'
             },
             {
                 id: 4,
-                tag: '深度',
-                title: '自由意志的迷思',
-                desc: '两位顶尖研究者关于道德责任与自由意志的思想交锋',
-                image: 'https://img3.doubanio.com/view/subject/l/public/s35399353.jpg',
-                link: 'article-detail.html?id=new-4'
+                tag: '深度阅读',
+                title: '寻访中国千年木构',
+                desc: '从应县木塔到佛光寺，一场跨越千年的文化之旅。在古建筑中，寻找文明的根脉与匠心。',
+                image: 'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=1800&q=80',
+                link: 'article-detail.html?id=new-3'
             }
         ];
         this.currentSlide = 0;
