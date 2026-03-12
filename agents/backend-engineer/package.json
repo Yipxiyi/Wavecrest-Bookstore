@@ -1,0 +1,25 @@
+{
+  "name": "neodb-supabase-sync",
+  "version": "1.0.0",
+  "description": "NeoDB to Supabase book synchronization system",
+  "main": "dist/sync.js",
+  "scripts": {
+    "build": "tsc",
+    "sync": "ts-node sync.ts",
+    "sync:daily": "ts-node sync.ts --job=daily",
+    "sync:weekly": "ts-node sync.ts --job=weekly",
+    "sync:monthly": "ts-node sync.ts --job=monthly",
+    "setup": "psql $DATABASE_URL -f schema.sql"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
