@@ -6,27 +6,35 @@ class BookstoreApp {
         this.carouselData = [
             {
                 id: 1,
-                tag: '专题',
-                title: '村上春树的夏天',
-                desc: '探索村上春树作品中的夏日意象与孤独美学',
-                image: 'https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=1800&q=80',
-                link: 'article-detail.html?id=1'
+                tag: '新书',
+                title: '哲学家们的真实人生',
+                desc: '从苏格拉底到尼采，十二位哲学家的真实人生故事，比八卦还有料的传记',
+                image: 'https://img1.doubanio.com/view/subject/l/public/s35418898.jpg',
+                link: 'article-detail.html?id=new-1'
             },
             {
                 id: 2,
-                tag: '书单',
-                title: '春日治愈系书单',
-                desc: '十本让心灵平静的好书，陪你度过温暖春日',
-                image: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1800&q=80',
-                link: 'article-detail.html?id=2'
+                tag: '专题',
+                title: '被艺术史遗忘的女性',
+                desc: '15-19世纪欧洲女性艺术家群像，52位艺术家的生平与创作',
+                image: 'https://img3.doubanio.com/view/subject/l/public/s35394322.jpg',
+                link: 'article-detail.html?id=new-2'
             },
             {
                 id: 3,
-                tag: '访谈',
-                title: '与译者对话',
-                desc: '翻译的艺术：如何在两种语言间传递文学之美',
-                image: 'https://images.unsplash.com/photo-1455885666463-9e84d871a46b?auto=format&fit=crop&w=1800&q=80',
-                link: 'article-detail.html?id=3'
+                tag: '推荐',
+                title: '寻访千年木构',
+                desc: '中国古建筑的匠心之旅，深入解读其蕴含的历史和人文信息',
+                image: 'https://img1.doubanio.com/view/subject/l/public/s35413829.jpg',
+                link: 'article-detail.html?id=new-3'
+            },
+            {
+                id: 4,
+                tag: '深度',
+                title: '自由意志的迷思',
+                desc: '两位顶尖研究者关于道德责任与自由意志的思想交锋',
+                image: 'https://img3.doubanio.com/view/subject/l/public/s35399353.jpg',
+                link: 'article-detail.html?id=new-4'
             }
         ];
         this.currentSlide = 0;
@@ -144,14 +152,21 @@ class BookstoreApp {
     }
 
     renderBookCard(book) {
-        return `
-            <article class="book-card" data-book-id="${book.id}">
-                <div class="book-cover" style="background-color: ${book.cover}">
+        // 判断封面是颜色还是图片URL
+        const isImageUrl = book.cover && (book.cover.startsWith('http://') || book.cover.startsWith('https://'));
+        
+        const coverHtml = isImageUrl 
+            ? `<div class="book-cover" style="background-image: url('${book.cover}'); background-size: cover; background-position: center;"></div>`
+            : `<div class="book-cover" style="background-color: ${book.cover}">
                     <div class="book-cover-placeholder">
                         <div class="book-cover-title">${book.title}</div>
                         <div class="book-cover-author">${book.author}</div>
                     </div>
-                </div>
+                </div>`;
+        
+        return `
+            <article class="book-card" data-book-id="${book.id}">
+                ${coverHtml}
                 <div class="book-info">
                     <h3 class="book-title">${book.title}</h3>
                     <p class="book-author">${book.author}</p>

@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600&family=Noto+Serif+SC:wght@400;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/articles.css">
 </head>
 <body>
     <!-- Navigation - Icon Only -->
@@ -59,123 +60,83 @@
         </div>
     </nav>
 
-    <!-- Articles Page -->
-    <main class="articles-page">
+    <!-- Blog Header -->
+    <header class="blog-header">
         <div class="container">
-            <div class="page-header">
+            <div class="blog-header-content">
                 <span class="section-tag">Articles</span>
-                <h1 class="page-title">阅读与思考</h1>
-                <p class="page-subtitle">关于书、关于人、关于连接</p>
+                <h1 class="blog-title">浪潮阅读</h1>
+                <p class="blog-subtitle">关于书、关于人、关于连接</p>
             </div>
-            
-            <div class="articles-grid" id="articlesGrid">
-                <!-- Article Card 1 -->
-                <article class="article-card">
-                    <a href="article-detail.html?id=1" class="article-link">
-                        <div class="article-image" style="background: linear-gradient(135deg, #8B7355, #A89078);">
-                            <span class="article-tag">专题</span>
+        </div>
+    </header>
+
+    <!-- Blog Layout -->
+    <main class="blog-layout">
+        <div class="container">
+            <div class="blog-grid">
+                <!-- Main Content - Article List -->
+                <div class="blog-main">
+                    <!-- Featured Articles -->
+                    <section class="featured-articles" id="featuredArticles">
+                        <h2 class="section-label">编辑推荐</h2>
+                        <div class="featured-grid" id="featuredGrid">
+                            <!-- Featured articles loaded by JS -->
                         </div>
-                        <div class="article-content">
-                            <span class="article-category">阅读方法</span>
-                            <h2 class="article-title">如何在数字时代保持深度阅读</h2>
-                            <p class="article-excerpt">在碎片化信息泛滥的今天，重新找回阅读的仪式感与深度思考的能力...</p>
-                            <div class="article-meta">
-                                <span>2026.03.10</span>
-                                <span>8 分钟阅读</span>
+                    </section>
+
+                    <!-- Article List -->
+                    <section class="article-list" id="articleList">
+                        <div class="list-header">
+                            <h2 class="section-label">最新文章</h2>
+                            <div class="filter-tabs">
+                                <button class="filter-tab active" data-filter="all">全部</button>
+                                <button class="filter-tab" data-filter="新书">新书</button>
+                                <button class="filter-tab" data-filter="专题">专题</button>
+                                <button class="filter-tab" data-filter="深度">深度</button>
                             </div>
                         </div>
-                    </a>
-                </article>
-                
-                <!-- Article Card 2 -->
-                <article class="article-card">
-                    <a href="article-detail.html?id=2" class="article-link">
-                        <div class="article-image" style="background: linear-gradient(135deg, #6B6B6B, #8B8B8B);">
-                            <span class="article-tag">书单</span>
+                        <div class="articles-stream" id="articlesStream">
+                            <!-- Articles loaded by JS -->
                         </div>
-                        <div class="article-content">
-                            <span class="article-category">编辑精选</span>
-                            <h2 class="article-title">春日疗愈书单：10本让心灵平静的书</h2>
-                            <p class="article-excerpt">春天是万物生长的季节，也是疗愈内心的好时机。我们精选了10本温暖治愈的好书...</p>
-                            <div class="article-meta">
-                                <span>2026.03.08</span>
-                                <span>5 分钟阅读</span>
-                            </div>
+                    </section>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="blog-sidebar">
+                    <!-- About Widget -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">关于</h3>
+                        <p class="widget-text">浪潮书店是一个关于阅读的线上空间。我们相信，没有人是一座孤岛，而书籍是连接彼此的桥梁。</p>
+                        <a href="about.html" class="widget-link">了解更多 →</a>
+                    </div>
+
+                    <!-- Categories Widget -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">分类</h3>
+                        <ul class="category-list" id="categoryList">
+                            <!-- Categories loaded by JS -->
+                        </ul>
+                    </div>
+
+                    <!-- Popular Books Widget -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">热门书籍</h3>
+                        <div class="widget-books" id="widgetBooks">
+                            <!-- Books loaded by JS -->
                         </div>
-                    </a>
-                </article>
-                
-                <!-- Article Card 3 -->
-                <article class="article-card">
-                    <a href="article-detail.html?id=3" class="article-link">
-                        <div class="article-image" style="background: linear-gradient(135deg, #C4B8A8, #D4CEC7);">
-                            <span class="article-tag">访谈</span>
-                        </div>
-                        <div class="article-content">
-                            <span class="article-category">作者对话</span>
-                            <h2 class="article-title">与村上春树作品译者聊翻译的艺术</h2>
-                            <p class="article-excerpt">翻译不仅是语言的转换，更是文化的传递。我们采访了资深译者，探讨翻译中的微妙之处...</p>
-                            <div class="article-meta">
-                                <span>2026.03.05</span>
-                                <span>12 分钟阅读</span>
-                            </div>
-                        </div>
-                    </a>
-                </article>
-                
-                <!-- Article Card 4 -->
-                <article class="article-card">
-                    <a href="article-detail.html?id=4" class="article-link">
-                        <div class="article-image" style="background: linear-gradient(135deg, #4A5568, #718096);">
-                            <span class="article-tag">观点</span>
-                        </div>
-                        <div class="article-content">
-                            <span class="article-category">书店日记</span>
-                            <h2 class="article-title">为什么我们还需要实体书店</h2>
-                            <p class="article-excerpt">在电子书盛行的时代，实体书店存在的意义是什么？这是我们运营书店三年来的思考...</p>
-                            <div class="article-meta">
-                                <span>2026.03.01</span>
-                                <span>6 分钟阅读</span>
-                            </div>
-                        </div>
-                    </a>
-                </article>
-                
-                <!-- Article Card 5 -->
-                <article class="article-card">
-                    <a href="article-detail.html?id=5" class="article-link">
-                        <div class="article-image" style="background: linear-gradient(135deg, #9B8B7A, #B5A89A);">
-                            <span class="article-tag">专栏</span>
-                        </div>
-                        <div class="article-content">
-                            <span class="article-category">设计美学</span>
-                            <h2 class="article-title">从MUJI到极简主义：日式设计的哲学</h2>
-                            <p class="article-excerpt">探索日式极简设计背后的哲学思想，以及它如何影响我们的阅读空间和生活方式...</p>
-                            <div class="article-meta">
-                                <span>2026.02.28</span>
-                                <span>10 分钟阅读</span>
-                            </div>
-                        </div>
-                    </a>
-                </article>
-                
-                <!-- Article Card 6 -->
-                <article class="article-card">
-                    <a href="article-detail.html?id=6" class="article-link">
-                        <div class="article-image" style="background: linear-gradient(135deg, #718096, #A0AEC0);">
-                            <span class="article-tag">推荐</span>
-                        </div>
-                        <div class="article-content">
-                            <span class="article-category">新书速递</span>
-                            <h2 class="article-title">三月不可错过的5本新书</h2>
-                            <p class="article-excerpt">本月出版的重磅新作，涵盖文学、设计、生活等多个领域，总有一本适合你...</p>
-                            <div class="article-meta">
-                                <span>2026.02.25</span>
-                                <span>4 分钟阅读</span>
-                            </div>
-                        </div>
-                    </a>
-                </article>
+                    </div>
+
+                    <!-- Newsletter Widget -->
+                    <div class="sidebar-widget widget-highlight">
+                        <h3 class="widget-title">订阅更新</h3>
+                        <p class="widget-text">每周精选文章与书单，直达你的邮箱。</p>
+                        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('感谢订阅！');">
+                            <input type="email" placeholder="your@email.com" class="newsletter-input" required>
+                            <button type="submit" class="newsletter-btn">订阅</button>
+                        </form>
+                    </div>
+                </aside>
             </div>
         </div>
     </main>
