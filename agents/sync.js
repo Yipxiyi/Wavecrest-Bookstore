@@ -118,7 +118,7 @@ class NeoDBSyncAgent {
   }
 
   async searchBooks(query, category = 'book') {
-    const url = `${CONFIG.NEODB_API_BASE}/catalog/search?q=${encodeURIComponent(query)}&category=${category}`;
+    const url = `${CONFIG.NEODB_API_BASE}/catalog/search?query=${encodeURIComponent(query)}${category ? `&category=${category}` : ''}`;
     return this.rateLimitedRequest(url);
   }
 
@@ -445,7 +445,7 @@ class NeoDBSyncAgent {
 
     // Merge and deduplicate
     const allArticles = [...articles, ...existingArticles];
-    const uniqueArticles = allArticles.filter((article, index, self) =
+    const uniqueArticles = allArticles.filter((article, index, self) =>
       index === self.findIndex(a => a.id === article.id)
     );
 
