@@ -298,3 +298,122 @@ body { font-family: var(--font-text); font-size: 16px; line-height: 1.5; color: 
     .section-title-wrap .section-title { font-size: 22px; }
     .value-card { padding: var(--space-md); }
 }
+/* 购书链接样式 - 添加到 styles.css */
+
+.purchase-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 16px;
+    padding: 24px;
+    margin: 24px 0;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.purchase-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a1a2e;
+    margin: 0 0 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.purchase-subtitle {
+    font-size: 0.875rem;
+    color: #666;
+    margin: 0 0 16px 0;
+}
+
+.purchase-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.purchase-link-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 12px;
+    background: white;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    position: relative;
+    gap: 6px;
+}
+
+.purchase-link-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    border-color: #007AFF;
+}
+
+.purchase-link-btn[data-platform="douban"]:hover { border-color: #00B51D; }
+.purchase-link-btn[data-platform="jd"]:hover { border-color: #E4393C; }
+.purchase-link-btn[data-platform="dangdang"]:hover { border-color: #FF2832; }
+.purchase-link-btn[data-platform="amazon_cn"]:hover { border-color: #FF9900; }
+
+.platform-icon {
+    font-size: 24px;
+    line-height: 1;
+}
+
+.platform-name {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.price-tag {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #E4393C;
+    background: #FFF2F0;
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+.stock-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    font-size: 0.625rem;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.stock-badge.in-stock {
+    background: #52c41a;
+    color: white;
+}
+
+.stock-badge.out-stock {
+    background: #ff4d4f;
+    color: white;
+}
+
+.purchase-note {
+    text-align: center;
+    color: #999;
+}
+
+.purchase-note small {
+    font-size: 0.75rem;
+}
+
+/* 响应式 */
+@media (max-width: 480px) {
+    .purchase-links-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .purchase-section {
+        padding: 16px;
+    }
+}

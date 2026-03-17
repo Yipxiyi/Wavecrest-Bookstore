@@ -277,6 +277,12 @@ class BookDetailPage {
             alert(`已将《${book.title}》加入购物车`);
         };
 
+        // 初始化购书链接模块
+        if (typeof PurchaseLinksModule !== 'undefined') {
+            const purchaseModule = new PurchaseLinksModule();
+            purchaseModule.render(book.neodb_uuid || book.id, book.title, 'purchaseLinksContainer');
+        }
+
         // Setup share button
         const shareBtn = document.getElementById('shareBtn');
         shareBtn.onclick = () => {
