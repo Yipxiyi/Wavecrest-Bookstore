@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wavecrest Test</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .debug-box { 
+            border: 2px solid red; 
+            padding: 10px; 
+            margin: 10px 0;
+            background: #ffe;
+        }
+        .debug-info {
+            color: red;
+            font-family: monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Debug Page</h1>
+    <div id="status" class="debug-box">Loading...</div>
+    <div id="books-container" class="books-scroll-container debug-box"></div>
+
+    <script>
+        async function test() {
+            const status = document.getElementById('status');
+            const container = document.getElementById('books-container');
+            
+            try {
+                status.innerHTML += '<br>Fetching data/books.json...';
+                const response = await fetch('data/books.json');
+                status.innerHTML += `<br>Response status: ${response.status}`;
+                
+                const data = await response.json();
+                status.innerHTML += `<br>Books count: ${data.books?.length || 0}`;
+                
+                if (!data.books || data.books.length === 0) {
+                    container.innerHTML = '<p class="debug-info">NO BOOKS</p>';
+                    return;
+                }
+                
+                container.innerHTML = data.books.map(b => `
+                    <article class="book-card debug-box">
+                        <div style="width:130px;height:173px;background:#9B8B7A;display:flex;align-items:center;justify-content:center;padding:10px;">
+                            <span style="color:white;font-size:12px;text-align:center;">${b.title?.substring(0,10) || 'NO TITLE'}</span>
+                        </div>
+                        <div class="book-info">
+                            <h3 class="book-title">${b.title || 'Unknown'}</h3>
+                            <p class="book-author">${b.author || 'Unknown'}</p>
+                        </div>
+                    </article>
+                `).join('');
+                
+                status.innerHTML += '<br>✅ Rendering complete';
+                
+            } catch (e) {
+                status.innerHTML += `<br>❌ Error: ${e.message}`;
+                console.error(e);
+            }
+        }
+        
+        test();
+    </script>
+</body>
+</html>
