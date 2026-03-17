@@ -132,6 +132,18 @@ class BookstoreApp {
 
             const year = book.publish_date ? parseInt(book.publish_date.split('-')[0]) : null;
             
+            // 根据索引分配到不同区域
+            let sections = ['recent'];
+            if (index < 10) {
+                sections = ['recent'];
+            } else if (index < 20) {
+                sections = ['featured'];
+            } else if (index < 30) {
+                sections = ['popular'];
+            } else {
+                sections = ['classic'];
+            }
+            
             return {
                 id: (index + 1).toString(),
                 neodb_uuid: book.uuid,
@@ -148,7 +160,7 @@ class BookstoreApp {
                 reviews: book.rating_count || 0,
                 description: book.description || '暂无简介',
                 highlight: book.description ? book.description.substring(0, 100) + '...' : '一本值得阅读的书',
-                sections: ['recent'],
+                sections: sections,
                 dateAdded: book.created_at ? book.created_at.split('T')[0] : new Date().toISOString().split('T')[0]
             };
         });
