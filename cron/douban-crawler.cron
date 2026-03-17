@@ -1,0 +1,14 @@
+# OpenClaw Cron 配置 - 豆瓣新书榜爬虫
+# 每天执行 2 次：09:00 和 21:00
+
+# 豆瓣爬虫定时任务
+# 每天上午 9:00 执行
+0 9 * * * cd ~/.openclaw/workspace/Wavecrest-Bookstore/scripts && npm install && node douban-crawler.js >> ../logs/douban-crawler.log 2>&1
+
+# 每天晚上 21:00 执行  
+0 21 * * * cd ~/.openclaw/workspace/Wavecrest-Bookstore/scripts && npm install && node douban-crawler.js >> ../logs/douban-crawler.log 2>&1
+
+# 说明：
+# - 每次执行前自动安装依赖（确保 node_modules 存在）
+# - 日志输出到 logs/douban-crawler.log
+# - 使用豆瓣 API 需要遵守其使用条款（添加延迟、User-Agent）

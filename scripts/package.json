@@ -1,0 +1,16 @@
+{
+  "name": "douban-crawler",
+  "version": "1.0.0",
+  "description": "豆瓣新书榜爬虫 - 定时抓取新书数据到 Supabase",
+  "main": "scripts/douban-crawler.js",
+  "scripts": {
+    "crawl": "node scripts/douban-crawler.js",
+    "crawl:dry": "node scripts/douban-crawler.js --dry-run"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
