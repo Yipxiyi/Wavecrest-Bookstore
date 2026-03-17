@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server'
+import { createStaticClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import { BookDetail } from '@/components/book/book-detail'
 
@@ -8,9 +8,20 @@ interface BookPageProps {
   }>
 }
 
+// Generate static params for all books
+export async function generateStaticParams() {
+  // Return a few sample IDs for static generation
+  // In production, you might want to fetch these from Supabase at build time
+  return [
+    { id: '1' },
+    { id: '2' },
+    { id: '3' },
+  ]
+}
+
 export default async function BookPage({ params }: BookPageProps) {
   const { id } = await params
-  const supabase = await createClient()
+  const supabase = createStaticClient()
   
   const { data: book, error } = await supabase
     .from('books')

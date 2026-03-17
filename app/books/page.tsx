@@ -1,8 +1,8 @@
-import { createClient } from '@/lib/supabase/server'
+import { createStaticClient } from '@/lib/supabase/server'
 import { BookList } from '@/components/book/book-list'
 
 export default async function BooksPage() {
-  const supabase = await createClient()
+  const supabase = createStaticClient()
   const { data: books, error } = await supabase
     .from('books')
     .select(`
