@@ -123,9 +123,13 @@ body { font-family: var(--font-text); font-size: 16px; line-height: 1.5; color: 
 
 /* Book card - fixed width for consistent layout */
 .book-card {
+  cursor: pointer;
+  transition: transform 0.2s;
   width: 130px;
   flex: 0 0 130px;
 }
+.book-card:hover { transform: translateY(-4px); }
+.book-card:hover .book-cover { box-shadow: var(--shadow-lg); }
 
 .book-title {
   font-size: 14px;
