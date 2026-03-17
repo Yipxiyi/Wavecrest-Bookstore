@@ -81,8 +81,11 @@ class BookstoreApp {
 
     async loadData() {
         console.log('📚 Starting to load data...');
+        // 首先加载本地数据确保页面有内容
+        await this.loadLocalData();
+        
+        // 然后尝试从 Supabase 加载更新数据
         try {
-            // 优先从 Supabase 加载
             console.log('🔄 Trying Supabase...');
             const books = await this.fetchFromSupabase();
             console.log('📦 Supabase response:', books);
@@ -91,14 +94,11 @@ class BookstoreApp {
                 console.log(`✅ Loaded ${books.length} books from Supabase`);
                 this.books = this.formatBooks(books);
                 console.log(`✅ Formatted ${this.books.length} books for display`);
-            } else {
-                console.warn('⚠️ Supabase returned empty, falling back to local JSON');
-                await this.loadLocalData();
+                // 重新渲染以显示 Supabase 数据
+                this.renderAllSections();
             }
         } catch (error) {
-            console.error('❌ Failed to load from Supabase:', error);
-            console.log('🔄 Falling back to local JSON...');
-            await this.loadLocalData();
+            console.error('❌ Supabase failed, keeping local data:', error.message);
         }
     }
     
