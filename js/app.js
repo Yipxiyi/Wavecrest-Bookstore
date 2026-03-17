@@ -58,111 +58,196 @@ class BookstoreApp {
     }
 
     async init() {
+        console.log('🚀 BookstoreApp initializing...');
         try {
             await this.loadData();
+            console.log('✅ Data loaded, rendering...');
             this.renderCarousel();
+            console.log('✅ Carousel rendered');
             this.renderAllSections();
+            console.log('✅ Sections rendered');
             this.setupEventListeners();
+            console.log('✅ Event listeners setup');
             this.setupScrollButtons();
+            console.log('✅ Scroll buttons setup');
             this.startAutoPlay();
+            console.log('✅ Autoplay started');
+            console.log('✅ BookstoreApp fully initialized!');
         } catch (error) {
-            console.error('Failed to initialize:', error);
+            console.error('❌ Failed to initialize BookstoreApp:', error);
+            console.error('Error stack:', error.stack);
         }
     }
 
     async loadData() {
+        console.log('📚 Starting to load data...');
         try {
             // 优先从 Supabase 加载
-            console.log('Loading books from Supabase...');
+            console.log('🔄 Trying Supabase...');
             const books = await this.fetchFromSupabase();
+            console.log('📦 Supabase response:', books);
+            
             if (books && books.length > 0) {
+                console.log(`✅ Loaded ${books.length} books from Supabase`);
                 this.books = this.formatBooks(books);
-                console.log(`Loaded ${this.books.length} books from Supabase`);
+                console.log(`✅ Formatted ${this.books.length} books for display`);
             } else {
-                // 回退到本地 JSON
-                console.log('Falling back to local data...');
-                const response = await fetch('data/books.json');
-                const data = await response.json();
-                this.books = data.books || [];
+                console.warn('⚠️ Supabase returned empty, falling back to local JSON');
+                await this.loadLocalData();
             }
         } catch (error) {
-            console.error('Failed to load data:', error);
-            // 回退到本地 JSON
+            console.error('❌ Failed to load from Supabase:', error);
+            console.log('🔄 Falling back to local JSON...');
+            await this.loadLocalData();
+        }
+    }
+    
+    async loadLocalData() {
+        try {
             const response = await fetch('data/books.json');
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
             const data = await response.json();
             this.books = data.books || [];
+            console.log(`✅ Loaded ${this.books.length} books from local JSON`);
+        } catch (error) {
+            console.error('❌ Failed to load local data:', error);
+            this.books = [];
         }
     }
 
     async fetchFromSupabase() {
         const url = `${this.SUPABASE_URL}/rest/v1/books?select=*&order=created_at.desc`;
-        const response = await fetch(url, {
-            headers: {
-                'apikey': this.SUPABASE_KEY,
-                'Authorization': `Bearer ${this.SUPABASE_KEY}`,
-                'Content-Type': 'application/json'
+        console.log('📡 Fetching from:', url);
+        
+        try {
+            const response = await fetch(url, {
+                headers: {
+                    'apikey': this.SUPABASE_KEY,
+                    'Authorization': `Bearer ${this.SUPABASE_KEY}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+            
+            console.log('📨 Response status:', response.status);
+            
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('❌ Supabase error response:', errorText);
+                throw new Error(`Supabase error: ${response.status} - ${errorText}`);
             }
-        });
-        
-        if (!response.ok) {
-            throw new Error(`Supabase error: ${response.status}`);
+            
+            const data = await response.json();
+            console.log('✅ Supabase data received:', data.length, 'books');
+            return data;
+            
+        } catch (error) {
+            console.error('❌ fetchFromSupabase failed:', error);
+            throw error;
         }
-        
-        return await response.json();
     }
 
     formatBooks(supabaseBooks) {
+        if (!Array.isArray(supabaseBooks)) {
+            console.error('formatBooks: expected array, got', typeof supabaseBooks);
+            return [];
+        }
+        
         return supabaseBooks.map((book, index) => {
-            // 解析 JSON 字段
-            let authors = [];
-            let categories = [];
-            let tags = [];
-            
             try {
-                authors = JSON.parse(book.authors || '[]');
-            } catch (e) { authors = [book.authors].filter(Boolean); }
-            
-            try {
-                categories = JSON.parse(book.categories || '[]');
-            } catch (e) { categories = [book.categories].filter(Boolean); }
-            
-            try {
-                tags = JSON.parse(book.tags || '[]');
-            } catch (e) { tags = []; }
+                // 解析 JSON 字段
+                let authors = [];
+                let categories = [];
+                let tags = [];
+                
+                try {
+                    authors = JSON.parse(book.authors || '[]');
+                } catch (e) { 
+                    authors = book.authors ? [book.authors] : []; 
+                }
+                
+                try {
+                    categories = JSON.parse(book.categories || '[]');
+                } catch (e) { 
+                    categories = book.categories ? [book.categories] : []; 
+                }
+                
+                try {
+                    tags = JSON.parse(book.tags || '[]');
+                } catch (e) { 
+                    tags = []; 
+                }
 
-            const year = book.publish_date ? parseInt(book.publish_date.split('-')[0]) : null;
-            
-            // 根据索引分配到不同区域
-            let sections = ['recent'];
-            if (index < 10) {
-                sections = ['recent'];
-            } else if (index < 20) {
-                sections = ['featured'];
-            } else if (index < 30) {
-                sections = ['popular'];
-            } else {
-                sections = ['classic'];
+                let year = 2026;
+                try {
+                    if (book.publish_date) {
+                        year = parseInt(book.publish_date.split('-')[0]) || 2026;
+                    }
+                } catch (e) { year = 2026; }
+                
+                // 根据索引分配到不同区域
+                let sections = ['recent'];
+                if (index < 10) {
+                    sections = ['recent'];
+                } else if (index < 20) {
+                    sections = ['featured'];
+                } else if (index < 30) {
+                    sections = ['popular'];
+                } else {
+                    sections = ['classic'];
+                }
+                
+                // 处理日期
+                let dateAdded = new Date().toISOString().split('T')[0];
+                try {
+                    if (book.created_at) {
+                        dateAdded = book.created_at.split('T')[0];
+                    }
+                } catch (e) { dateAdded = new Date().toISOString().split('T')[0]; }
+                
+                return {
+                    id: String(index + 1),
+                    neodb_uuid: book.uuid || '',
+                    title: book.title || '未知书名',
+                    subtitle: book.subtitle || '',
+                    author: Array.isArray(authors) ? authors.join(', ') : '未知作者',
+                    publisher: book.publisher || '未知出版社',
+                    year: year,
+                    pages: book.page_count || 0,
+                    category: this.mapCategory(categories),
+                    tags: Array.isArray(tags) ? tags : [],
+                    cover: book.cover_image_url || '',
+                    rating: book.rating ? String(book.rating.toFixed(1)) : '4.0',
+                    reviews: book.rating_count || 0,
+                    description: book.description || '暂无简介',
+                    highlight: book.description ? book.description.substring(0, 100) + '...' : '一本值得阅读的书',
+                    sections: sections,
+                    dateAdded: dateAdded
+                };
+            } catch (err) {
+                console.error('Error formatting book at index', index, err);
+                // 返回一个默认的书籍对象
+                return {
+                    id: String(index + 1),
+                    neodb_uuid: '',
+                    title: '加载失败',
+                    subtitle: '',
+                    author: '未知',
+                    publisher: '未知出版社',
+                    year: 2026,
+                    pages: 0,
+                    category: 'nonfiction',
+                    tags: [],
+                    cover: '',
+                    rating: '4.0',
+                    reviews: 0,
+                    description: '数据加载失败',
+                    highlight: '数据加载失败',
+                    sections: ['recent'],
+                    dateAdded: new Date().toISOString().split('T')[0]
+                };
             }
-            
-            return {
-                id: (index + 1).toString(),
-                neodb_uuid: book.uuid,
-                title: book.title,
-                subtitle: book.subtitle || '',
-                author: authors.join(', ') || '未知作者',
-                publisher: book.publisher || '未知出版社',
-                year: year || 2026,
-                pages: book.page_count || 0,
-                category: this.mapCategory(categories),
-                tags: tags,
-                cover: book.cover_image_url || '',
-                rating: book.rating ? book.rating.toFixed(1) : '4.0',
-                reviews: book.rating_count || 0,
-                description: book.description || '暂无简介',
-                highlight: book.description ? book.description.substring(0, 100) + '...' : '一本值得阅读的书',
-                sections: sections,
-                dateAdded: book.created_at ? book.created_at.split('T')[0] : new Date().toISOString().split('T')[0]
-            };
         });
     }
 
