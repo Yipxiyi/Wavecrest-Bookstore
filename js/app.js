@@ -8,10 +8,10 @@ class BookstoreApp {
             {
                 id: 1,
                 tag: '新书速递',
-                title: '2026年春季新书',
-                desc: '从豆瓣精选21本即将出版的重磅新作，涵盖哲学、艺术、历史与科学。每一本都值得期待。',
-                image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=1800&q=80',
-                link: 'articles.html'
+                title: '2026春季新书速递',
+                desc: '五本值得期待的非虚构佳作：从《鏡之孤城》作者的创作指南到印尼无政府主义社会的隐秘历史，陪你度过这个充满希望的春天。',
+                image: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1800&q=80',
+                link: 'article-detail.html?id=spring-2026'
             },
             {
                 id: 2,
