@@ -193,6 +193,197 @@
       ],
       "dateAdded": "2026-03-14 02:38:50",
       "neodb_uuid": "3zWRR44z7E1j4MjdWv0pA2"
+    },
+    {
+      "id": "10",
+      "title": "我们的一切往昔",
+      "author": "[意] 娜塔莉亚·金兹伯格",
+      "category": "文学",
+      "tags": [
+        "文学",
+        "小说"
+      ],
+      "cover": "https://img9.doubanio.com/view/subject/s/public/s38197669.jpg",
+      "price": 0,
+      "rating": "8.4",
+      "reviews": 55,
+      "year": 2026,
+      "pages": 0,
+      "publisher": "上海译文出版社",
+      "description": "意大利国宝级作家娜塔莉亚·金兹伯格的短篇小说集，探讨记忆、身份与归属。",
+      "highlight": "意大利国宝级作家娜塔莉亚·金兹伯格的短篇小说集，探讨记忆、身份与归属。...",
+      "sections": [
+        "recent"
+      ],
+      "dateAdded": "2026-03-17 18:00:00",
+      "neodb_uuid": "douban-2026-001"
+    },
+    {
+      "id": "11",
+      "title": "欢迎再来",
+      "author": "白嵩",
+      "category": "文学",
+      "tags": [
+        "文学"
+      ],
+      "cover": "https://img9.doubanio.com/view/subject/s/public/s38210549.jpg",
+      "price": 0,
+      "rating": "8.7",
+      "reviews": 81,
+      "year": 2026,
+      "pages": 0,
+      "publisher": "上海人民出版社",
+      "description": "白嵩作品，关于重逢与告别的故事。",
+      "highlight": "白嵩作品，关于重逢与告别的故事。...",
+      "sections": [
+        "recent"
+      ],
+      "dateAdded": "2026-03-17 18:00:00",
+      "neodb_uuid": "douban-2026-002"
+    },
+    {
+      "id": "12",
+      "title": "马孔多在下雨",
+      "author": "[哥伦比亚] 加西亚·马尔克斯",
+      "category": "文学",
+      "tags": [
+        "文学",
+        "小说"
+      ],
+      "cover": "https://img9.doubanio.com/view/subject/s/public/s36946790.jpg",
+      "price": 0,
+      "rating": "9.1",
+      "reviews": 68,
+      "year": 2026,
+      "pages": 0,
+      "publisher": "南海出版公司",
+      "description": "马尔克斯经典作品，魔幻现实主义代表作。",
+      "highlight": "马尔克斯经典作品，魔幻现实主义代表作。...",
+      "sections": [
+        "recent"
+      ],
+      "dateAdded": "2026-03-17 18:00:00",
+      "neodb_uuid": "douban-2026-003"
+    },
+    {
+      "id": "13",
+      "title": "巴黎评论·非虚构作家访谈",
+      "author": "美国《巴黎评论》编辑部",
+      "category": "文学",
+      "tags": [
+        "文学",
+        "访谈"
+      ],
+      "cover": "https://img9.doubanio.com/view/subject/s/public/s37531200.jpg",
+      "price": 0,
+      "rating": "9.4",
+      "reviews": 45,
+      "year": 2026,
+      "pages": 0,
+      "publisher": "人民文学出版社",
+      "description": "《巴黎评论》非虚构作家访谈集。",
+      "highlight": "《巴黎评论》非虚构作家访谈集。...",
+      "sections": [
+        "recent"
+      ],
+      "dateAdded": "2026-03-17 18:00:00",
+      "neodb_uuid": "douban-2026-004"
+    },
+    {
+      "id": "14",
+      "title": "面孔：从君主肖像到全民自拍",
+      "author": "[意] 里卡尔多·法尔奇内利",
+      "category": "艺术",
+      "tags": [
+        "艺术",
+        "设计",
+        "历史文化"
+      ],
+      "cover": "https://img9.doubanio.com/view/subject/s/public/s37890148.jpg",
+      "price": 0,
+      "rating": "9.2",
+      "reviews": 46,
+      "year": 2026,
+      "pages": 0,
+      "publisher": "北京联合出版公司",
+      "description": "艺术史视角下的肖像演变。",
+      "highlight": "艺术史视角下的肖像演变。...",
+      "sections": [
+        "recent"
+      ],
+      "dateAdded": "2026-03-17 18:00:00",
+      "neodb_uuid": "douban-2026-005"
+    },
+    {
+      "id": "15",
+      "title": "劳特利奇赛博朋克手册",
+      "author": "[英] 安娜·麦克法兰等",
+      "category": "文化",
+      "tags": [
+        "文化",
+        "艺术"
+      ],
+      "cover": "https://img9.doubanio.com/view/subject/s/public/s37808374.jpg",
+      "price": 0,
+      "rating": "7.7",
+      "reviews": 47,
+      "year": 2026,
+      "pages": 0,
+      "publisher": "浙江大学出版社",
+      "description": "赛博朋克文化研究专著。",
+      "highlight": "赛博朋克文化研究专著。...",
+      "sections": [
+        "recent"
+      ],
+      "dateAdded": "2026-03-17 18:00:00",
+      "neodb_uuid": "douban-2026-006"
+    },
+    {
+      "id": "16",
+      "title": "可怜的东西",
+      "author": "[英] 阿拉斯代尔·格雷",
+      "category": "文学",
+      "tags": [
+        "文学",
+        "小说"
+      ],
+      "cover": "https://img9.doubanio.com/view/subject/s/public/s37651737.jpg",
+      "price": 0,
+      "rating": "None",
+      "reviews": 0,
+      "year": 2026,
+      "pages": 0,
+      "publisher": "上海译文出版社",
+      "description": "奥斯卡获奖电影原著小说。",
+      "highlight": "奥斯卡获奖电影原著小说。...",
+      "sections": [
+        "recent"
+      ],
+      "dateAdded": "2026-03-17 18:00:00",
+      "neodb_uuid": "douban-2026-007"
+    },
+    {
+      "id": "17",
+      "title": "一间不属于自己的房间",
+      "author": "[西] 艾丽西亚·吉梅内斯·巴特利特",
+      "category": "文学",
+      "tags": [
+        "文学"
+      ],
+      "cover": "https://img9.doubanio.com/view/subject/s/public/s38197887.jpg",
+      "price": 0,
+      "rating": "8.6",
+      "reviews": 35,
+      "year": 2026,
+      "pages": 0,
+      "publisher": "万卷出版有限责任公司",
+      "description": "关于空间与归属的文学探索。",
+      "highlight": "关于空间与归属的文学探索。...",
+      "sections": [
+        "recent"
+      ],
+      "dateAdded": "2026-03-17 18:00:00",
+      "neodb_uuid": "douban-2026-008"
     }
   ]
 }
