@@ -1,4 +1,5 @@
 // Wavecrest Bookstore - Home Page with Carousel
+// Supabase Integration: Fetches books from Supabase PostgreSQL
 
 class BookstoreApp {
     constructor() {
@@ -38,6 +39,11 @@ class BookstoreApp {
             }
         ];
         this.currentSlide = 0;
+        
+        // Supabase 配置
+        this.SUPABASE_URL = 'https://tjqaqieefrolvtqzpaeo.supabase.co';
+        this.SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqcWFxaWVlZnJvbHZ0cXpwYWVvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMyMTg3ODgsImV4cCI6MjA4ODc5NDc4OH0.c_5SbFQ5ByQk5dMFwHMGgn3nMzbdjWvwWAVhUFvW5xo';
+        
         this.init();
     }
 
@@ -65,9 +71,109 @@ class BookstoreApp {
     }
 
     async loadData() {
-        const response = await fetch('data/books.json');
-        const data = await response.json();
-        this.books = data.books;
+        try {
+            // 优先从 Supabase 加载
+            console.log('Loading books from Supabase...');
+            const books = await this.fetchFromSupabase();
+            if (books && books.length > 0) {
+                this.books = this.formatBooks(books);
+                console.log(`Loaded ${this.books.length} books from Supabase`);
+            } else {
+                // 回退到本地 JSON
+                console.log('Falling back to local data...');
+                const response = await fetch('data/books.json');
+                const data = await response.json();
+                this.books = data.books || [];
+            }
+        } catch (error) {
+            console.error('Failed to load data:', error);
+            // 回退到本地 JSON
+            const response = await fetch('data/books.json');
+            const data = await response.json();
+            this.books = data.books || [];
+        }
+    }
+
+    async fetchFromSupabase() {
+        const url = `${this.SUPABASE_URL}/rest/v1/books?select=*&order=created_at.desc`;
+        const response = await fetch(url, {
+            headers: {
+                'apikey': this.SUPABASE_KEY,
+                'Authorization': `Bearer ${this.SUPABASE_KEY}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error(`Supabase error: ${response.status}`);
+        }
+        
+        return await response.json();
+    }
+
+    formatBooks(supabaseBooks) {
+        return supabaseBooks.map((book, index) => {
+            // 解析 JSON 字段
+            let authors = [];
+            let categories = [];
+            let tags = [];
+            
+            try {
+                authors = JSON.parse(book.authors || '[]');
+            } catch (e) { authors = [book.authors].filter(Boolean); }
+            
+            try {
+                categories = JSON.parse(book.categories || '[]');
+            } catch (e) { categories = [book.categories].filter(Boolean); }
+            
+            try {
+                tags = JSON.parse(book.tags || '[]');
+            } catch (e) { tags = []; }
+
+            const year = book.publish_date ? parseInt(book.publish_date.split('-')[0]) : null;
+            
+            return {
+                id: (index + 1).toString(),
+                neodb_uuid: book.uuid,
+                title: book.title,
+                subtitle: book.subtitle || '',
+                author: authors.join(', ') || '未知作者',
+                publisher: book.publisher || '未知出版社',
+                year: year || 2026,
+                pages: book.page_count || 0,
+                category: this.mapCategory(categories),
+                tags: tags,
+                cover: book.cover_image_url || '',
+                rating: book.rating ? book.rating.toFixed(1) : '4.0',
+                reviews: book.rating_count || 0,
+                description: book.description || '暂无简介',
+                highlight: book.description ? book.description.substring(0, 100) + '...' : '一本值得阅读的书',
+                sections: ['recent'],
+                dateAdded: book.created_at ? book.created_at.split('T')[0] : new Date().toISOString().split('T')[0]
+            };
+        });
+    }
+
+    mapCategory(categories) {
+        const categoryMap = {
+            '小说': 'fiction',
+            '文学': 'literature',
+            '艺术': 'art',
+            '设计': 'design',
+            '历史': 'history',
+            '哲学': 'philosophy',
+            '心理学': 'psychology',
+            '科学': 'science',
+            '商业': 'business',
+            '传记': 'biography'
+        };
+        
+        for (const cat of categories) {
+            for (const [cn, en] of Object.entries(categoryMap)) {
+                if (cat && cat.includes(cn)) return en;
+            }
+        }
+        return 'nonfiction';
     }
 
     renderCarousel() {
@@ -154,9 +260,13 @@ class BookstoreApp {
 
         container.innerHTML = sectionBooks.map(book => this.renderBookCard(book)).join('');
 
+        // Add click handlers
         container.querySelectorAll('.book-card').forEach((card, index) => {
             card.addEventListener('click', () => {
-                window.location.href = `book.html?id=${sectionBooks[index].id}`;
+                const book = sectionBooks[index];
+                // 使用 neodb_uuid 如果存在，否则使用 id
+                const bookId = book.neodb_uuid || book.id;
+                window.location.href = `book.html?id=${bookId}`;
             });
         });
     }
